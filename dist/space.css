@@ -1,0 +1,396 @@
+/* Avoiding synthax-highlighters collision */
+.space:not(span) {
+    --gutterWidth: 50px;
+    --spaceWidth: 100vw;
+    --spaceHeight: calc((100vh / 2) + 10px - 28px);
+    --textareaPadding: 5px;
+    --scrollbarPadding: 0px;
+    --fontSize: 14px;
+    --borderRadius: 2px;
+    /* IF YOU UPDATE BELOW LINE, UPDATE THE NEXT ONE TOO. */
+    --lineHeight: 1.35714285;
+    --lineHeightModuloOne: 0.35714285;
+    --tabSize: 4;
+}
+
+.space .space-editor {
+    position: relative;
+    font-family: Consolas, Menlo, JuliaMono, Liberation Mono, monospace;
+    width: var(--spaceWidth);
+    height: calc(var(--spaceHeight) - var(--textareaPadding) * 2);
+    border-radius: var(--borderRadius);
+    /* Fallback */
+    overflow: auto;
+    overflow: overlay;
+    tab-size: var(--tabSize);
+    font-size: var(--fontSize);
+    line-height: var(--lineHeight);
+}
+
+.space .space-editor[data-state="js-off"] {
+    width: fit-content;
+    height: fit-content;
+    overflow: visible;
+}
+
+.space .space-editor::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+.space .space-editor::-webkit-scrollbar {
+    display: block;
+    height: var(--fontSize);
+    width: var(--fontSize);
+}
+
+.space .space-editor::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+.space .space-editor::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.space .space-editor::-webkit-scrollbar-button:start:increment:horizontal {
+    width: var(--gutterWidth);
+    display: block;
+    background: transparent;
+    /* Doesn't seem to work */
+    pointer-events: none;
+}
+
+.space .space-editor[data-state="focused"] {
+    outline: 1px solid #FEFEFE;
+}
+
+.space .space-gutter {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--textareaPadding);
+    padding-bottom: var(--textareaPadding);
+    width: var(--gutterWidth);
+    height: calc(100% - var(--textareaPadding) * 2);
+    background-color: #242424;
+    color: #808080;
+    z-index: 1;
+}
+
+.space .space-editor[data-state="js-off"] .space-gutter {
+    display: none;
+}
+
+.space .space-gutter div {
+    position: relative;
+    white-space: pre;
+    text-align: center;
+    padding-left: calc(var(--textareaPadding) * 3);
+    padding-right: calc(var(--textareaPadding) * 3);
+    width: calc(100% - var(--textareaPadding) * 4);
+    background-color: #242424;
+    user-select: none;
+}
+
+.space .currentLine,
+.space .selectionEnd {
+    color: #FEFEFE;
+}
+
+.space .currentLine::after {
+    content: '';
+    background-color: #FEFEFE;
+    position: absolute;
+    left: calc(100% - var(--textareaPadding));
+    top: 0;
+    width: calc(var(--spaceWidth) - var(--gutterWidth) - var(--scrollbarPadding));
+    height: 100%;
+    opacity: .1;
+    pointer-events: none;
+}
+
+.space .space-container {
+    position: absolute;
+    top: 0;
+    left: var(--gutterWidth);
+    width: calc(100% - var(--gutterWidth));
+    height: 100%;
+    cursor: text;
+}
+
+.space .space-editor[data-state="js-off"] .space-container {
+    position: static;
+}
+
+.space .space-suggestions {
+    display: none;
+}
+
+.space textarea,
+.space pre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: var(--textareaPadding);
+    min-width: calc(100% - 2 * var(--textareaPadding));
+    margin: 0;
+    /* Still required here */
+    tab-size: var(--tabSize);
+    /* Still required here */
+    font-size: var(--fontSize);
+    /* Still required here */
+    line-height: var(--lineHeight);
+}
+
+.space pre {
+    height: fit-content;
+    pointer-events: none;
+    user-select: none;
+}
+
+.space .space-editor[data-state="js-off"] pre {
+    display: none;
+}
+
+.space textarea {
+    white-space: pre;
+    color: transparent;
+    caret-color: #FEFEFE;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    background-color: transparent;
+    outline: none;
+}
+
+.space .space-editor[data-state="js-off"] textarea {
+    position: static;
+    color: #FEFEFE;
+    border: 1px solid grey;
+    resize: both;
+    width: 200px;
+    height: 200px;
+    overflow: visible;
+    border-radius: var(--borderRadius);
+}
+
+.space .space-editor[data-state="js-off"] textarea:focus {
+    outline: 1px solid #FEFEFE;
+}
+
+.space textarea::selection {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.space .space-overlay {
+    font-style: italic;
+    color: #66d9ef;
+}
+
+.space .space-overlay code {
+    position: absolute;
+}
+
+.space .indent-guide {
+    position: relative;
+    font-style: normal;
+}
+
+.space .space-overlay .indent-guide::after {
+    position: absolute;
+    left: calc(-50%);
+    top: calc((var(--fontSize) * (var(--lineHeightModuloOne) / 2) * -1));
+    content: '|';
+    color: #808080;
+    font-size: calc(var(--fontSize) * var(--lineHeight));
+    opacity: 0.6;
+    font-style: normal;
+}
+
+.space .space-overlay .token.space,
+.space .space-overlay .token.tab:not(:empty) {
+    position: relative;
+    font-style: normal;
+}
+
+.space .space-overlay .token.space:before,
+.space .space-overlay .token.tab:not(:empty):before {
+    position: absolute;
+    color: #808080;
+    opacity: 0.6;
+    font-style: normal;
+}
+
+.space .space-overlay .token.space:before {
+    content: '\00B7';
+    font-style: normal;
+}
+
+.space .space-overlay .token.tab:not(:empty):before {
+    content: '\21E5';
+    font-style: normal;
+}
+
+.space .space-caretPadding,
+.space .space-caret {
+    font-style: normal;
+    white-space: pre;
+    display: inline;
+}
+
+.space .space-caretPadding {
+    visibility: hidden;
+    /* Doesn't work, unfortunately */
+    transition-property: all;
+    transition-duration: .4s;
+}
+
+.space .space-caret {
+    visibility: hidden;
+    background-color: #FEFEFE;
+    border-radius: 3px;
+    animation: blink 1s infinite;
+}
+
+.space .list-hyphen {
+    color: #E06C75;
+    font-style: normal;
+}
+
+.space .number,
+.space .boolean,
+.space .null {
+    color: #FF80F4;
+    font-style: normal;
+}
+
+.space .string {
+    color: #FFEE99;
+    font-style: normal;
+}
+
+.space .comment {
+    color: #808080;
+    font-style: normal;
+}
+
+.space .operator,
+.space .list,
+.space .map,
+.space .punctuation {
+    color: #FEFEFE;
+    font-style: normal;
+}
+
+.space .space-dummyTextarea {
+    pointer-events: none;
+    display: block;
+}
+
+.space .space-statusBar {
+    display: flex;
+    align-items: center;
+    padding-left: calc(2 * var(--textareaPadding));
+    padding-right: calc(2 * var(--textareaPadding));
+    height: 27px;
+    width: calc(100% - 4 * var(--textareaPadding));
+    border-top: 1px solid #383838;
+    font-size: 12px;
+}
+
+/* Reset */
+.space .space-statusBar button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    border-radius: 0;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+    text-align: inherit;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.space .space-statusBar button.success {
+    animation: blinkWhite 1s;
+}
+
+.space .space-statusBar button.error {
+    animation: blinkRed 1s;
+}
+
+/* Reset */
+.space .space-statusBar button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.space .space-statusBar>a,
+.space .space-statusBar>button {
+    margin-left: calc(2 * var(--textareaPadding));
+    color: #FEFEFE;
+}
+
+.space .space-statusBar div {
+    margin-left: auto;
+}
+.space .space-statusBar div,
+.space .space-statusBar button,
+.space .space-statusBar a {
+    display: flex;
+    align-items: center;
+}
+
+.space .space-statusBar div kbd {
+    border: 1px solid royalblue;
+    padding-left: calc(2 * var(--textareaPadding));
+    padding-right: calc(2 * var(--textareaPadding));
+    border-radius: 2px;
+}
+
+.space .space-statusBar div a {
+    color: #FEFEFE;
+}
+
+.space .space-statusBar span {
+    color:#E06C75;
+}
+
+.space .space-statusBar svg {
+    height: 18px;
+    margin-left: 4px;
+}
+
+
+@media only screen and (max-width: 639px) {
+    .space:not(span) .space-gutter,
+    .space:not(span) .space-editor textarea,
+    .space:not(span) .space-editor pre {
+        font-size: 10px;
+    }
+}
+
+@keyframes blinkWhite {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: #FEFEFE;
+    }
+}
+
+@keyframes blinkRed {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: #E06C75;
+    }
+}

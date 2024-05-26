@@ -1,0 +1,8 @@
+.vscode/
+lib/
+node_modules/
+visualBenchmark.html
+index.html
+kanban.md
+out.js
+out.js.map

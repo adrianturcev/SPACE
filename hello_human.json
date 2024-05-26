@@ -1,0 +1,16 @@
+{
+    "@context": {
+        "given_name": {
+            "@id": "https://www.wikidata.org/wiki/Property:P735",
+            "@type": "@id"
+        },
+        "time_zone": {
+            "@id": "https://www.wikidata.org/wiki/Property:P2907",
+            "@type": "@id"
+        },
+        "website": {
+            "@id": "https://www.wikidata.org/wiki/Property:P856",
+            "@type": "@id"
+        }
+    }
+}
