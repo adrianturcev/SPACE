@@ -10,7 +10,7 @@ HTML interactive documents
 
 ## Features
 
-- [x] DAMON synthax highlighting
+- [x] [DAMON](https://github.com/adrianturcev/SPACE) synthax highlighting
 - [x] DAMON linting
 - [x] Light-enough for hardcoding
 - [x] No tab-order hijacking
