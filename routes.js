@@ -375,8 +375,9 @@ space.textarea
     .addEventListener('input', textareaInputRoute);
 space.editor
     .addEventListener('scroll', spaceScrollRoute);
-window
-    .addEventListener('resize', windowResizeRoute);
+// Bug: resizing after a linting error empties the overlay
+// window
+//     .addEventListener('resize', windowResizeRoute);
 
 function textareaInputRoute() {
     if (document.activeElement != space.textarea) {
@@ -396,13 +397,18 @@ function spaceScrollRoute(e) {
     space.updateCurrentLine(true);
 }
 
+window.spaceResizeTimeout = null;
 function windowResizeRoute(e) {
-    let previousScrollTop = space.editor.scrollTop;
-    space.gutter.innerHTML = '';
-    space.overlay.firstElementChild.innerHTML = '';
-    space.initialized = false;
-    space.gutterVirtualScroller.inputHandler();
-    space.initialized = true;
-    space.editor.scrollTop = previousScrollTop;
+    // Throtles resize events
+    if (spaceResizeTimeout) {clearTimeout(spaceResizeTimeout)};
+    window.spaceResizeTimeout = setTimeout(function() {
+        let previousScrollTop = space.editor.scrollTop;
+        space.gutter.innerHTML = '';
+        space.overlay.firstElementChild.innerHTML = '';
+        space.initialized = false;
+        space.gutterVirtualScroller.inputHandler();
+        space.initialized = true;
+        space.editor.scrollTop = previousScrollTop;
+    },100);
 }
 });

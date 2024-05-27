@@ -429,7 +429,6 @@ class Space {
             textInput.style.opacity = 0;
             try {
                 textInput.value = space.damon.damonToJSON(space.textarea.value);
-                console.log('A');
             } catch (error) {
                 setTimeout(function() {
                     space.copyButton.classList.remove('error');
@@ -449,7 +448,7 @@ class Space {
                     space.copyButton.classList.add('success')
                 }
             } catch (err) {
-            console.error(err.name, err.message);
+                console.error(err.name, err.message);
             }
             document.body.removeChild(textInput);
         });
