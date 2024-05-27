@@ -53,8 +53,10 @@ grunt concat
 ## Usage
 
 ```html
-<script src="./bundle.js">
-const space = new Space();
+<script src="./bundle.js" type="text/javascript"></script>
+<script  type="text/javascript">
+    const space = new Space();
+</script>
 ```
 
 ## Attributions
