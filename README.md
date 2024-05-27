@@ -6,7 +6,7 @@
 
 ## Use Cases
 
-Built for interactive documents
+HTML interactive documents
 
 ## Features
 
