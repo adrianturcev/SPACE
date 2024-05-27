@@ -18,16 +18,14 @@ HTML interactive documents
     - [x] Insert tab character ( ) shortcut
         - ctrl + space
         - auto-format after
-- [x] Simple codebase
 - [x] Look & feel close to a basic html element
     - [x] Indent with Space/BackSpace
 - [x] Handles large number of rows
-- [x] Layout shortcuts
+- [x] Layout shortcuts and automation
     - [x] auto-indent on enter
     - [x] indent selection or line
         - ctrl + ]
         - ctrl + [
-- [x] Indentation 
     - [x] auto-format indent on paste
     - [x] auto-format hyphens on paste
     - [x] formatting shortcut
