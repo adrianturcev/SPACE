@@ -51,7 +51,10 @@ grunt concat
 ## Usage
 
 ```HTML
-<script src="./bundle.js" type="text/javascript"></script>
+<head>
+    <link href="./dist/space.css" type="text/css" rel="stylesheet">
+(...)
+<script src="./dist/bundle.js" type="text/javascript"></script>
 <script  type="text/javascript">
     const space = new Space(document.getElementsByClassName('space')[0], Prism);
 </script>
