@@ -22,14 +22,12 @@ Built for interactive documents
 - [x] Look & feel close to a basic html element
     - [x] Indent with Space/BackSpace
 - [x] Handles large number of rows
-- [x] Indentation 
+- [x] Layout shortcuts
     - [x] auto-indent on enter
-        - check previous line indent
-        - check next line indent
-        - take the max
     - [x] indent selection or line
         - ctrl + ]
         - ctrl + [
+- [x] Indentation 
     - [x] auto-format indent on paste
     - [x] auto-format hyphens on paste
     - [x] formatting shortcut
