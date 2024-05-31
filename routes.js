@@ -144,23 +144,32 @@ function textareaKeydownRoute(e) {
         if (e.key == " ") {
             if (space.textarea.selectionStart == space.textarea.selectionEnd) {
                 if (
-                    /\n +$/.test(space.textarea.value.slice(0, space.textarea.selectionStart))
-                    || (
-                        space.textarea.selectionStart < space.textarea.value.length
+                    ( // First line
+                        !/\n/.test(space.textarea.value.slice(0, space.textarea.selectionStart))
                         && (
-                            /\n +\n$/.test(space.textarea.value.slice(0, space.textarea.selectionStart + 1))
-                            || /\n$/.test(space.textarea.value.slice(0, space.textarea.selectionStart))
+                            / +$/.test(space.textarea.value.slice(0, space.textarea.selectionStart))
+                            || space.textarea.selectionStart === 0
                         )
-                    )
-                    || (
-                        space.textarea.value.length == space.textarea.selectionStart
-                        && (
-                            /\n +$/.test(space.textarea.value)
-                            || /\n$/.test(space.textarea.value)
+                    ) || (
+                        /\n +$/.test(space.textarea.value.slice(0, space.textarea.selectionStart))
+                        || (
+                            space.textarea.selectionStart < space.textarea.value.length
+                            && (
+                                /\n +\n$/.test(space.textarea.value.slice(0, space.textarea.selectionStart + 1))
+                                || /\n$/.test(space.textarea.value.slice(0, space.textarea.selectionStart))
+                            )
+                        )
+                        || ( // Last line
+                            space.textarea.value.length == space.textarea.selectionStart
+                            && (
+                                /\n +$/.test(space.textarea.value)
+                                || /\n$/.test(space.textarea.value)
+                            )
                         )
                     )
                 ) {
                     e.preventDefault();
+                    console.log('A');
                     let nextCaretPosition = space.textarea.selectionStart + 4;
                     let value =
                         space.textarea.value.slice(0, space.textarea.selectionStart)
