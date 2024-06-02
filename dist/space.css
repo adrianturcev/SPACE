@@ -357,6 +357,7 @@
 
 .space .space-statusBar div a {
     color: #FEFEFE;
+    margin-left: 4px;
 }
 
 .space .space-statusBar span {
