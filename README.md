@@ -42,9 +42,9 @@ node esbuild
 
 ```bash
 node esbuild-dist
-# Builds and watch space.min.js
+# Builds and watch client.min.js
 grunt concat
-# Builds ./dist/bundle.js
+# Builds ./dist/space.min.js
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ grunt concat
 <head>
     <link href="./dist/space.css" type="text/css" rel="stylesheet">
 (...)
-<script src="./dist/bundle.js" type="text/javascript"></script>
+<script src="./dist/space.min.js" type="text/javascript"></script>
 <script  type="text/javascript">
     const space = new Space(document.getElementsByClassName('space')[0], Prism);
 </script>

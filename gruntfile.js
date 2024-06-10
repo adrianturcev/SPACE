@@ -13,9 +13,9 @@ module.exports = function(grunt) {
                 src: [
                     'prism.js',
                     'prism-damon.js',
-                    'space.min.js',
+                    'client.min.js',
                 ],
-                dest: 'dist/bundle.js'
+                dest: 'dist/space.min.js'
             }
         },
     });
