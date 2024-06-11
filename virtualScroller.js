@@ -103,7 +103,9 @@ class VirtualScroller {
                     .replaceAll(/&lt;/g, '<')
                     .replaceAll(/&gt;/g, '>'),
             prismRows = $.parent.prism
-                            .highlight(unEscapedValue, $.parent.prism.languages.damon, 'damon')
+                            .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
+                            // Syntax highlighting workaround
+                            .replace(/<span>\n<\/span>$/, '')
                             .split('\n</span>')
                             .map((x) => x + '\n</span>'),
             lastTextAreaRows = $.parent.lastTextareaValue.split('\n');
@@ -240,7 +242,9 @@ class VirtualScroller {
                             .replaceAll(/&gt;/g, '>'),
                     prismRows =
                         $.parent.prism
-                            .highlight(unEscapedValue, $.parent.prism.languages.damon, 'damon')
+                            .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
+                            // Syntax highlighting workaround
+                            .replace(/<span>\n<\/span>$/, '')
                             .split('\n</span>')
                             .map((x) => x + '\n</span>'),
                     lastTextAreaRows = $.parent.lastTextareaValue.split('\n');
@@ -298,7 +302,9 @@ class VirtualScroller {
                             .replaceAll(/&gt;/g, '>'),
                     prismRows =
                         $.parent.prism
-                            .highlight(unEscapedValue, $.parent.prism.languages.damon, 'damon')
+                            .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
+                            // Syntax highlighting workaround
+                            .replace(/<span>\n<\/span>$/, '')
                             .split('\n</span>')
                             .map((x) => x + '\n</span>'),
                     lastTextAreaRows = $.parent.lastTextareaValue.split('\n');

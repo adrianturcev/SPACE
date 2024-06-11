@@ -10,14 +10,14 @@ Prism.languages.damon = {
 		greedy: true
 	},
 	'comment': {
-		pattern: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/,
+		pattern: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)\n/,
 		greedy: true
 	},
-	'number': /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/i,
+	'number': /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b\n/i,
 	'operator': /:/,
-	'boolean': /\b(?:false|true)\b/,
+	'boolean': /\b(?:false|true)\b\n/,
 	'null': {
-		pattern: /\bnull\b/,
+		pattern: /\bnull\b\n/,
 		alias: 'keyword'
 	},
 	'map': {
