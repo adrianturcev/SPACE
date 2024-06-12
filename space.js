@@ -30,7 +30,7 @@ class Space {
         $.history = [];
         $.historyPosition = 0;
         $.historyUpdateTimeoutId;
-        $.lastTextareaValue = null;
+        $.lastTextareaValue = '';
         $.lastSelection = '';
         $.initialized = false;
         $.gutterVirtualScroller = {};
@@ -119,7 +119,10 @@ class Space {
 
     update() {
         let $ = this;
-        if ($.lastTextareaValue == $.textarea.value) {
+        if (
+            $.initialized
+            && $.lastTextareaValue == $.textarea.value
+        ) {
             return;
         }
         if ($.gutter.children.length == 0) {
