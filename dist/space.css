@@ -11,6 +11,7 @@
     --lineHeight: 1.35714285;
     --lineHeightModuloOne: 0.35714285;
     --tabSize: 4;
+    background-color: #242424;
 }
 
 .space .space-editor {
