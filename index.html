@@ -215,7 +215,7 @@
     <script>
         let helloHumanSchema = '';
         var req = new XMLHttpRequest();
-        req.open("GET", './hello_human.json', false);
+        req.open("GET", './hello_human.jsonld', false);
         req.addEventListener("load", function () {
             if (req.status < 200 || req.status >= 400) {
                 console.error(req.status + " " + req.statusText + " " + url);
