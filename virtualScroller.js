@@ -102,13 +102,16 @@ class VirtualScroller {
                     .replaceAll(/&amp;/g, '&')
                     .replaceAll(/&lt;/g, '<')
                     .replaceAll(/&gt;/g, '>'),
-            prismRows = $.parent.prism
-                            .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
-                            // Syntax highlighting workaround
-                            .replace(/<span>\n<\/span>$/, '')
-                            .split('\n</span>')
-                            .map((x) => x + '\n</span>'),
+            prismRows = ['<span class="space-line"></span>'],
             lastTextAreaRows = $.parent.lastTextareaValue.split('\n');
+        if (unEscapedValue != '') {
+            prismRows = $.parent.prism
+                .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
+                // Syntax highlighting workaround
+                .replace(/<span>\n<\/span>$/, '')
+                .split('\n')
+                .map((x) => x.replace(/^<\/span>/, '') + '\n</span>');
+        }
         for (let i = startNode, c = startNode + clamp; i < c; i++) {
             let line = document.createElement('span'),
                 spaceCounter = 0;
@@ -245,8 +248,8 @@ class VirtualScroller {
                             .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
                             // Syntax highlighting workaround
                             .replace(/<span>\n<\/span>$/, '')
-                            .split('\n</span>')
-                            .map((x) => x + '\n</span>'),
+                            .split('\n')
+                            .map((x) => x.replace(/^<\/span>/, '') + '\n</span>'),
                     lastTextAreaRows = $.parent.lastTextareaValue.split('\n');
                 for (let i = 0, c = delta; i < c; i++) {
                     $.parent.overlay.firstElementChild.firstElementChild.remove();
@@ -305,8 +308,8 @@ class VirtualScroller {
                             .highlight(unEscapedValue + '\n', $.parent.prism.languages.damon, 'damon')
                             // Syntax highlighting workaround
                             .replace(/<span>\n<\/span>$/, '')
-                            .split('\n</span>')
-                            .map((x) => x + '\n</span>'),
+                            .split('\n')
+                            .map((x) => x.replace(/^<\/span>/, '') + '\n</span>'),
                     lastTextAreaRows = $.parent.lastTextareaValue.split('\n');
                 for (let i = 0, c = delta; i < c; i++) {
                     $.parent.overlay.firstElementChild.lastElementChild.remove();

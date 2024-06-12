@@ -78,7 +78,9 @@ class Space {
     <div class="space-gutter"></div>
     <div class="space-container">
 <pre class="space-dummyTextarea"><span class="space-caretPadding"></span><span class="space-caret">&nbsp;</span></pre>
-        <pre class="space-overlay" aria-hidden="true" tabindex="-1"><code class="language-damon"></code></pre>
+        <pre class="space-overlay" aria-hidden="true" tabindex="-1">
+            <code class="language-damon"></code>
+        </pre>
         <textarea
             class="space-textarea"
             spellcheck="false"
