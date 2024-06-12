@@ -30,7 +30,7 @@ class Space {
         $.history = [];
         $.historyPosition = 0;
         $.historyUpdateTimeoutId;
-        $.lastTextareaValue = '';
+        $.lastTextareaValue = null;
         $.lastSelection = '';
         $.initialized = false;
         $.gutterVirtualScroller = {};
@@ -109,9 +109,10 @@ class Space {
         $.statusBar = $.dom.getElementsByClassName('space-statusBar')[0];
         $.copyButton =  $.dom.getElementsByClassName('space-copyButton')[0];
         $.gutterVirtualScroller = new VirtualScroller(this);
-        $.editor.dataset.state= '';
+        $.editor.dataset.state = '';
         // Normalizing textarea content
         $.textarea.value = $.formatIndentation($.textarea.value.replaceAll(/\r/g, ''));
+        // $.gutterVirtualScroller.init();
         $.routes = require('./routes.js')(this);
         $.lint();
     }
