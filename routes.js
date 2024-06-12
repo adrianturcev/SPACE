@@ -169,7 +169,6 @@ function textareaKeydownRoute(e) {
                     )
                 ) {
                     e.preventDefault();
-                    console.log('A');
                     let nextCaretPosition = space.textarea.selectionStart + 4;
                     let value =
                         space.textarea.value.slice(0, space.textarea.selectionStart)
