@@ -1,4 +1,4 @@
-exports =
+module.exports =
 (function (space) {
 // # Scheduling
 // ## Space.js

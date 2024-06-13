@@ -3,7 +3,7 @@ const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
 //#### Space
 // <element class="space">
-exports =
+module.exports =
 class Space {
     //# MODEL
     /**
