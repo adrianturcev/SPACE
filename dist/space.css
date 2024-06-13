@@ -315,6 +315,7 @@
     text-align: inherit;
     overflow: visible;
     text-transform: none;
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
