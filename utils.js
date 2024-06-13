@@ -1,4 +1,4 @@
-module.exports = {
+exports = {
 // For sanity's sake
 
 // # NIL

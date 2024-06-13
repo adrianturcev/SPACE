@@ -1,7 +1,7 @@
 
 //#### VirtualScroller
 // <element id="gutter">
-module.exports =
+exports =
 class VirtualScroller {
     //# MODEL
     constructor(parentContext) {

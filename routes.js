@@ -1,4 +1,5 @@
-module.exports = (function (space) {
+exports =
+(function (space) {
 // # Scheduling
 // ## Space.js
 // Filling the overlay as to trigger Prismjs on load
