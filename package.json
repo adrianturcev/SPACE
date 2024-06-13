@@ -27,11 +27,11 @@
   },
   "devDependencies": {
     "esbuild": "^0.21.3",
-    "tslib": "^2.6.2"
-  },
-  "dependencies": {
-    "damon2": "^2.0.4",
+    "tslib": "^2.6.2",
     "grunt": "^1.6.1",
     "grunt-contrib-concat": "^2.1.0"
+  },
+  "dependencies": {
+    "damon2": "^2.0.4"
   }
 }
