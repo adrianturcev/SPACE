@@ -230,9 +230,6 @@
             output = document.getElementById('output'),
             space = new Space(document.getElementsByClassName('space')[0], Prism);
         space.init();
-        space.textarea.addEventListener('paste', update);
-        space.textarea.addEventListener('input', update);
-        space.textarea.addEventListener('keydown', update);
         function update(e) {
             try {
                 output.innerHTML = "";
@@ -242,9 +239,7 @@
                         true,
                         helloHumanSchema
                     ));
-                space.lint();
             } catch (error) {
-                space.lint()
                 console.error(error);
             }
             hljs.highlightAll();

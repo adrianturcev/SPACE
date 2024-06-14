@@ -35,14 +35,14 @@ HTML interactive documents
 
 ```bash
 node esbuild
-# Builds and watch out.js
+# Builds & watch ./out.js
 ```
 
 ### Distribuable
 
 ```bash
 node esbuild-dist
-# Builds and watch client.min.js
+# Builds and watch ./client.min.js
 grunt concat
 # Builds ./dist/space.min.js
 ```
@@ -56,6 +56,7 @@ grunt concat
 <script src="./dist/space.min.js" type="text/javascript"></script>
 <script  type="text/javascript">
     const space = new Space(document.getElementsByClassName('space')[0], Prism);
+    space.init();
 </script>
 ```
 
