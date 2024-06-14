@@ -54,6 +54,8 @@ grunt concat
     <link href="./dist/space.css" type="text/css" rel="stylesheet">
 <head>
 <body>
+    
+    <div class="space"><textarea>- Example</textarea></div>
     <script src="./dist/space.min.js" type="text/javascript"></script>
     <script  type="text/javascript">
         const space = new Space(document.getElementsByClassName('space')[0], Prism);
