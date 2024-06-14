@@ -313,6 +313,12 @@ function textareaKeydownRoute(e) {
             space.setTextarea(space.formatIndentation(space.textarea.value), space.textarea.selectionEnd);
         }
     }
+    try {
+        space.lint();
+    } catch (error) {
+        space.lint()
+        console.error(error);
+    }
 }
 
 function textareaCutRoute(e) {
@@ -376,6 +382,12 @@ function textareaPasteRoute(e) {
         textareaInputRoute();
     }
     space.updateCaret();
+    try {
+        space.lint();
+    } catch (error) {
+        space.lint()
+        console.error(error);
+    }
 }
 
 // # virtualScroller.js
@@ -399,6 +411,12 @@ function textareaInputRoute() {
     space.updateCurrentLine();
     space.updateHorizontalScroll();
     space.updateCaret();
+    try {
+        space.lint();
+    } catch (error) {
+        space.lint()
+        console.error(error);
+    }
 }
 
 function spaceScrollRoute(e) {
