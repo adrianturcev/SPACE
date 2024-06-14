@@ -102,7 +102,7 @@ class VirtualScroller {
                     .replaceAll(/&amp;/g, '&')
                     .replaceAll(/&lt;/g, '<')
                     .replaceAll(/&gt;/g, '>'),
-            prismRows = ['<span class="space-line"></span>'],
+            prismRows = ['<span class="token lf">\n</span>'],
             lastTextAreaRows = $.parent.lastTextareaValue.split('\n');
         if (unEscapedValue != '') {
             prismRows = $.parent.prism
@@ -129,7 +129,8 @@ class VirtualScroller {
                 }
             }
             if (
-                lastTextAreaRows[i] == undefined
+                !$.parent.initialized
+                || lastTextAreaRows[i] == undefined
                 || lastTextAreaRows[i] != rows[i]
                 || (
                     $.parent.overlay.firstElementChild.children[i - startNode] != undefined
