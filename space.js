@@ -434,14 +434,14 @@ class Space {
         $.copyButton = $.dom.getElementsByClassName('space-copyButton')[0];
         $.copyButton.addEventListener('click', function (e) {
             let textInput = document.createElement('textarea');
-            textInput.style.opacity = 0;
+            textInput.style.opacity = "0";
             try {
-                textInput.value = space.damon.damonToJSON(space.textarea.value);
+                textInput.value = $.damon.damonToJSON($.textarea.value);
             } catch (error) {
                 setTimeout(function() {
-                    space.copyButton.classList.remove('error');
+                    $.copyButton.classList.remove('error');
                 }, 1100);
-                space.copyButton.classList.add('error');
+                $.copyButton.classList.add('error');
                 return;
             }
             document.body.appendChild(textInput);
@@ -451,9 +451,9 @@ class Space {
                 const success = document.execCommand("copy");
                 if (success) {
                     setTimeout(function() {
-                        space.copyButton.classList.remove('success')
+                        $.copyButton.classList.remove('success')
                     }, 1100);
-                    space.copyButton.classList.add('success')
+                    $.copyButton.classList.add('success')
                 }
             } catch (err) {
                 console.error(err.name, err.message);

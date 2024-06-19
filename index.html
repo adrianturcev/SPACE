@@ -230,6 +230,12 @@
             output = document.getElementById('output'),
             space = new Space(document.getElementsByClassName('space')[0], Prism);
         space.init();
+        space.textarea
+            .addEventListener('keydown', update);
+        space.textarea
+            .addEventListener('input', update);
+        space.textarea
+            .addEventListener('paste', update);
         function update(e) {
             try {
                 output.innerHTML = "";
