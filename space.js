@@ -33,7 +33,7 @@ class Space {
         $.lastTextareaValue = '';
         $.lastSelection = '';
         $.initialized = false;
-        $.gutterVirtualScroller = {};
+        $.virtualScroller = {};
         $.damon = new DamonTwo();
         $.utils = utils;
     }
@@ -110,11 +110,11 @@ class Space {
         $.caret = $.dom.getElementsByClassName('space-caret')[0];
         $.statusBar = $.dom.getElementsByClassName('space-statusBar')[0];
         $.copyButton =  $.dom.getElementsByClassName('space-copyButton')[0];
-        $.gutterVirtualScroller = new VirtualScroller(this);
+        $.virtualScroller = new VirtualScroller(this);
         $.editor.dataset.state = '';
         // Normalizing textarea content
         $.textarea.value = $.formatIndentation($.textarea.value.replaceAll(/\r/g, ''));
-        // $.gutterVirtualScroller.init();
+        // $.virtualScroller.init();
         $.routes = require('./routes.js')(this);
         $.lint();
     }
@@ -128,9 +128,9 @@ class Space {
             return;
         }
         if ($.gutter.children.length == 0) {
-            $.gutterVirtualScroller.init(0);
+            $.virtualScroller.init(0);
         } else {
-            $.gutterVirtualScroller.inputHandler();
+            $.virtualScroller.inputHandler();
         }
         if ($.initialized) {
             $.lastTextareaValue = $.textarea.value;

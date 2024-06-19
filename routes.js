@@ -292,7 +292,7 @@ function textareaKeydownRoute(e) {
                 space.historyPosition -= 1;
                 space.setTextarea(space.history[space.historyPosition - 1][0], space.history[space.historyPosition - 1][1]);
                 space.update();
-                space.gutterVirtualScroller.inputHandler(true);
+                space.virtualScroller.inputHandler(true);
                 space.textarea.blur();
                 space.textarea.focus();
             }
@@ -303,7 +303,7 @@ function textareaKeydownRoute(e) {
                 space.historyPosition += 1;
                 space.setTextarea(space.history[space.historyPosition - 1][0], space.history[space.historyPosition - 1][1]);
                 space.update();
-                space.gutterVirtualScroller.inputHandler(true);
+                space.virtualScroller.inputHandler(true);
                 space.textarea.blur();
                 space.textarea.focus();
             }
@@ -404,7 +404,7 @@ function textareaInputRoute() {
     if (document.activeElement != space.textarea) {
         return;
     }
-    // space.gutterVirtualScroller.inputHandler();
+    // space.virtualScroller.inputHandler();
 
     space.update();
     space.debounceHistoryUpdate();
@@ -420,7 +420,7 @@ function textareaInputRoute() {
 }
 
 function spaceScrollRoute(e) {
-    space.gutterVirtualScroller.scrollHandler();
+    space.virtualScroller.scrollHandler();
     space.updateCurrentLine(true);
 }
 
@@ -433,7 +433,7 @@ function windowResizeRoute(e) {
         space.gutter.innerHTML = '';
         space.overlay.firstElementChild.innerHTML = '';
         space.initialized = false;
-        space.gutterVirtualScroller.inputHandler();
+        space.virtualScroller.inputHandler();
         space.initialized = true;
         space.editor.scrollTop = previousScrollTop;
     },100);
