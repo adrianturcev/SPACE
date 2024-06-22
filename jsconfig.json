@@ -1,6 +1,9 @@
 {
     "compilerOptions": {
-        "checkJs": true
+        "checkJs": true,
+        "target": "ES2019",
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext"
     },
     "exclude": ["node_modules", "**/node_modules/*"]
 }
