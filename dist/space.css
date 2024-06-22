@@ -1,5 +1,4 @@
-/* Avoiding synthax-highlighters collision */
-.space:not(span) {
+space- {
     --gutterWidth: 50px;
     --spaceWidth: 100vw;
     --spaceHeight: calc((100vh / 2) + 10px - 28px);
@@ -14,7 +13,7 @@
     background-color: #242424;
 }
 
-.space .space-editor {
+space- .space-editor {
     position: relative;
     font-family: Consolas, Menlo, JuliaMono, Liberation Mono, monospace;
     width: var(--spaceWidth);
@@ -28,31 +27,31 @@
     line-height: var(--lineHeight);
 }
 
-.space .space-editor[data-state="js-off"] {
+space- .space-editor[data-state="js-off"] {
     width: fit-content;
     height: fit-content;
     overflow: visible;
 }
 
-.space .space-editor::-webkit-scrollbar-corner {
+space- .space-editor::-webkit-scrollbar-corner {
     background-color: transparent;
 }
 
-.space .space-editor::-webkit-scrollbar {
+space- .space-editor::-webkit-scrollbar {
     display: block;
     height: var(--fontSize);
     width: var(--fontSize);
 }
 
-.space .space-editor::-webkit-scrollbar-track-piece {
+space- .space-editor::-webkit-scrollbar-track-piece {
     background-color: transparent;
 }
 
-.space .space-editor::-webkit-scrollbar-thumb {
+space- .space-editor::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, .3);
 }
 
-.space .space-editor::-webkit-scrollbar-button:start:increment:horizontal {
+space- .space-editor::-webkit-scrollbar-button:start:increment:horizontal {
     width: var(--gutterWidth);
     display: block;
     background: transparent;
@@ -60,11 +59,11 @@
     pointer-events: none;
 }
 
-.space .space-editor[data-state="focused"] {
+space- .space-editor[data-state="focused"] {
     outline: 1px solid #FEFEFE;
 }
 
-.space .space-gutter {
+space- .space-gutter {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -78,11 +77,11 @@
     z-index: 1;
 }
 
-.space .space-editor[data-state="js-off"] .space-gutter {
+space- .space-editor[data-state="js-off"] .space-gutter {
     display: none;
 }
 
-.space .space-gutter div {
+space- .space-gutter div {
     position: relative;
     white-space: pre;
     text-align: center;
@@ -93,12 +92,12 @@
     user-select: none;
 }
 
-.space .currentLine,
-.space .selectionEnd {
+space- .currentLine,
+space- .selectionEnd {
     color: #FEFEFE;
 }
 
-.space .currentLine::after {
+space- .currentLine::after {
     content: '';
     background-color: #FEFEFE;
     position: absolute;
@@ -110,7 +109,7 @@
     pointer-events: none;
 }
 
-.space .space-container {
+space- .space-container {
     position: absolute;
     top: 0;
     left: var(--gutterWidth);
@@ -119,16 +118,16 @@
     cursor: text;
 }
 
-.space .space-editor[data-state="js-off"] .space-container {
+space- .space-editor[data-state="js-off"] .space-container {
     position: static;
 }
 
-.space .space-suggestions {
+space- .space-suggestions {
     display: none;
 }
 
-.space textarea,
-.space pre {
+space- textarea,
+space- pre {
     position: absolute;
     top: 0;
     left: 0;
@@ -143,17 +142,17 @@
     line-height: var(--lineHeight);
 }
 
-.space pre {
+space- pre {
     height: fit-content;
     pointer-events: none;
     user-select: none;
 }
 
-.space .space-editor[data-state="js-off"] pre {
+space- .space-editor[data-state="js-off"] pre {
     display: none;
 }
 
-.space textarea {
+space- textarea {
     white-space: pre;
     color: transparent;
     caret-color: #FEFEFE;
@@ -164,7 +163,7 @@
     outline: none;
 }
 
-.space .space-editor[data-state="js-off"] textarea {
+space- .space-editor[data-state="js-off"] textarea {
     position: static;
     color: #FEFEFE;
     border: 1px solid grey;
@@ -175,29 +174,29 @@
     border-radius: var(--borderRadius);
 }
 
-.space .space-editor[data-state="js-off"] textarea:focus {
+space- .space-editor[data-state="js-off"] textarea:focus {
     outline: 1px solid #FEFEFE;
 }
 
-.space textarea::selection {
+space- textarea::selection {
     background-color: rgba(255, 255, 255, .1);
 }
 
-.space .space-overlay {
+space- .space-overlay {
     font-style: italic;
     color: #66d9ef;
 }
 
-.space .space-overlay code {
+space- .space-overlay code {
     position: absolute;
 }
 
-.space .indent-guide {
+space- .indent-guide {
     position: relative;
     font-style: normal;
 }
 
-.space .space-overlay .indent-guide::after {
+space- .space-overlay .indent-guide::after {
     position: absolute;
     left: calc(-50%);
     top: calc((var(--fontSize) * (var(--lineHeightModuloOne) / 2) * -1));
@@ -208,87 +207,87 @@
     font-style: normal;
 }
 
-.space .space-overlay .token.space,
-.space .space-overlay .token.tab:not(:empty) {
+space- .space-overlay .token.space,
+space- .space-overlay .token.tab:not(:empty) {
     position: relative;
     font-style: normal;
 }
 
-.space .space-overlay .token.space:before,
-.space .space-overlay .token.tab:not(:empty):before {
+space- .space-overlay .token.space:before,
+space- .space-overlay .token.tab:not(:empty):before {
     position: absolute;
     color: #808080;
     opacity: 0.6;
     font-style: normal;
 }
 
-.space .space-overlay .token.space:before {
+space- .space-overlay .token.space:before {
     content: '\00B7';
     font-style: normal;
 }
 
-.space .space-overlay .token.tab:not(:empty):before {
+space- .space-overlay .token.tab:not(:empty):before {
     content: '\21E5';
     font-style: normal;
 }
 
-.space .space-caretPadding,
-.space .space-caret {
+space- .space-caretPadding,
+space- .space-caret {
     font-style: normal;
     white-space: pre;
     display: inline;
 }
 
-.space .space-caretPadding {
+space- .space-caretPadding {
     visibility: hidden;
     /* Doesn't work, unfortunately */
     transition-property: all;
     transition-duration: .4s;
 }
 
-.space .space-caret {
+space- .space-caret {
     visibility: hidden;
     background-color: #FEFEFE;
     border-radius: 3px;
     animation: blink 1s infinite;
 }
 
-.space .list-hyphen {
+space- .list-hyphen {
     color: #E06C75;
     font-style: normal;
 }
 
-.space .number,
-.space .boolean,
-.space .null {
+space- .number,
+space- .boolean,
+space- .null {
     color: #FF80F4;
     font-style: normal;
 }
 
-.space .string {
+space- .string {
     color: #FFEE99;
     font-style: normal;
 }
 
-.space .comment {
+space- .comment {
     color: #808080;
     font-style: normal;
 }
 
-.space .operator,
-.space .list,
-.space .map,
-.space .punctuation {
+space- .operator,
+space- .list,
+space- .map,
+space- .punctuation {
     color: #FEFEFE;
     font-style: normal;
 }
 
-.space .space-dummyTextarea {
+space- .space-dummyTextarea {
     pointer-events: none;
     display: block;
 }
 
-.space .space-statusBar {
+space- .space-statusBar {
     display: flex;
     align-items: center;
     padding-left: calc(2 * var(--textareaPadding));
@@ -300,7 +299,7 @@
 }
 
 /* Reset */
-.space .space-statusBar button {
+space- .space-statusBar button {
     border: none;
     margin: 0;
     padding: 0;
@@ -320,53 +319,53 @@
     -moz-appearance: none;
 }
 
-.space .space-statusBar button.success {
+space- .space-statusBar button.success {
     animation: blinkWhite 1s;
 }
 
-.space .space-statusBar button.error {
+space- .space-statusBar button.error {
     animation: blinkRed 1s;
 }
 
 /* Reset */
-.space .space-statusBar button::-moz-focus-inner {
+space- .space-statusBar button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-.space .space-statusBar>a,
-.space .space-statusBar>button {
+space- .space-statusBar>a,
+space- .space-statusBar>button {
     margin-left: calc(2 * var(--textareaPadding));
     color: #FEFEFE;
 }
 
-.space .space-statusBar div {
+space- .space-statusBar div {
     margin-left: auto;
 }
-.space .space-statusBar div,
-.space .space-statusBar button,
-.space .space-statusBar a {
+space- .space-statusBar div,
+space- .space-statusBar button,
+space- .space-statusBar a {
     display: flex;
     align-items: center;
 }
 
-.space .space-statusBar div kbd {
+space- .space-statusBar div kbd {
     border: 1px solid royalblue;
     padding-left: calc(2 * var(--textareaPadding));
     padding-right: calc(2 * var(--textareaPadding));
     border-radius: 2px;
 }
 
-.space .space-statusBar div a {
+space- .space-statusBar div a {
     color: #FEFEFE;
     margin-left: 4px;
 }
 
-.space .space-statusBar span {
+space- .space-statusBar span {
     color:#E06C75;
 }
 
-.space .space-statusBar svg {
+space- .space-statusBar svg {
     height: 18px;
     margin-left: 4px;
 }

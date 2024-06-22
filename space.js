@@ -2,7 +2,7 @@ const  utils = require('./utils.js');
 const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
 //#### Space
-// <element class="space">
+// <space>
 module.exports =
 class Space {
     //# MODEL
@@ -13,7 +13,6 @@ class Space {
     constructor(rootElement, prism, app) {
         let $ = this;
         $.dom = rootElement;
-        $.dom.classList.add('space');
         $.innerHTML = '';
         $.editor = {};
         $.gutter = {};

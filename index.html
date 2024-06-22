@@ -151,7 +151,7 @@
 
 <body>
     <div id="ioContainer">
-        <div class="space">
+        <space->
             <div class="space-editor" data-state="js-off">
                 <div class="space-gutter"></div>
                 <div class="space-container">
@@ -190,7 +190,7 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </space->
         <div id="outputContainer">
             <span id="outputText">OUTPUT</span>
             <div id="output" style="background-color: rgb(36, 36, 36);">
@@ -228,7 +228,7 @@
         helloHumanSchema = req.responseText;
         let options = document.getElementsByTagName('input'),
             output = document.getElementById('output'),
-            space = new Space(document.getElementsByClassName('space')[0], Prism);
+            space = new Space(document.getElementsByTagName('space-')[0], Prism);
         space.init();
         space.textarea
             .addEventListener('keydown', update);
