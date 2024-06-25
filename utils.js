@@ -1,7 +1,7 @@
 module.exports = {
 // For sanity's sake
 
-// # NIL
+// # Nil
 
 // I like the NOT operator's conciseness when testing for null or undefined
 // I like strict type checking
@@ -10,8 +10,8 @@ module.exports = {
 // - single argument
 
 /**
- * neither null nor undefined
- *
+ * Nil
+ * Neither null nor undefined
  * @param { boolean } exp
  * @returns { boolean }
  */
@@ -33,7 +33,6 @@ nil(exp) { // values implicitly considered functions
 
 /**
  * Hack
- *
  * @param { number } start
  * @param { number } end
  * @returns
@@ -42,15 +41,14 @@ hack(array, start, end) {
     return array.slice(start, end + 1);
 },
 
-// # Prune
+// # Prune/Pick
 
 // Javascript inherited spreadsheet-like .filter()
 // It felt confusing there
 // It feels confusing here too
 
 /**
- * Prune
- *
+ * Pick
  * @param {*} array
  * @param {*} pruningFunction
  * @returns
@@ -58,9 +56,10 @@ hack(array, start, end) {
 pick(array, pruningFunction) {
     return array.filter(pruningFunction);
 },
+
 /**
- * The inverse of filter
- *
+ * Prune
+ * The inverse of filter()
  * @param {*} array
  * @param {*} filteringFunction
  * @returns
@@ -76,7 +75,6 @@ prune(array, filteringFunction) {
 // .every() just sounds weird
 /**
  * Check
- *
  * @param {*} array
  * @param {*} checkingFunction
  * @returns
@@ -84,9 +82,9 @@ prune(array, filteringFunction) {
 check(array, checkingFunction) {
     return array.every(checkingFunction);
 },
+
 /**
- *
- *
+ * Escape
  * @param { string } string
  * @returns
  */
@@ -102,7 +100,6 @@ escape(string) {
 /**
  * Template tag identity
  * triggers html syntax highlighting
- *
  * @param {*} strings
  * @returns
  */
@@ -128,7 +125,6 @@ html(strings) {
 
 /**
  * Add
- *
  * @param { object } element
  * @param { string } state
  */
@@ -150,7 +146,6 @@ addDataState(element, state) {
 
 /**
  * Remove
- *
  * @param { object } element
  * @param { string } state
  */
@@ -172,7 +167,6 @@ removeDataState(element, state) {
 
 /**
  * Replace
- *
  * @param { object } element
  * @param { string } stateToRemove
  * @param { string } stateToAdd
@@ -184,7 +178,6 @@ replaceDataState(element, stateToRemove, stateToAdd) {
 
 /**
  * Toggle
- *
  * @param { object } element
  * @param { string } state
  */
@@ -195,6 +188,72 @@ toggleDataState(element, state) {
     } else {
         this.removeDataState(element, state);
     }
+},
+
+//# AJAX Functions
+
+/**
+ * AJAX GET
+ * @param {string} url The target url
+ * @param {function} callback
+ * @param {boolean} isJson Response contains json
+ * @param {object} callbackContext
+ */
+ajaxGet(url, callback, isJson, callbackContext) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+            if (isJson) {
+                var json = {};
+                try {
+                    json = JSON.parse(req.responseText);
+                } catch (error) {
+                    console.error("Get request returned invalid JSON.")
+                }
+                callbackContext === undefined ? callback(json) : callback.apply(callbackContext, [json]);
+            } else {
+                callbackContext === undefined ? callback(req.responseText) : callback.apply(callbackContext, [req.responseText]);
+            }
+        } else {
+            console.error(req.status + " " + req.statusText + " " + url);
+        }
+    });
+    req.addEventListener("error", function () {
+        console.error("Network error trying to access: " + url);
+    });
+    req.send(null);
+},
+
+/**
+ * AJAX POST
+ * @param {string} url
+ * @param {string} data
+ * @param {function} successCallback
+ * @param {function} failureCallback
+ * @param {boolean} isJson
+ * @param {object} successCallbackContext
+ * @param {object} failureCallbackContext
+ */
+ajaxPost(url, data, successCallback, failureCallback, isJson, successCallbackContext, failureCallbackContext) {
+    var req = new XMLHttpRequest();
+    req.open("POST", url);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+            successCallbackContext === undefined ? successCallback(req) : successCallback.apply(successCallbackContext, [req]);
+        } else {
+            failureCallbackContext === undefined ? failureCallback(req) : failureCallback.apply(failureCallbackContext, [req]);
+            console.error(req.status + " " + req.statusText + " " + url);
+        }
+    });
+    req.addEventListener("error", function () {
+        console.error("Network error trying to access: " + url);
+    });
+    if (isJson) {
+        req.setRequestHeader("Content-Type", "application/json");
+        data = JSON.stringify(data);
+    }
+    req.send(data);
 }
 
 };
