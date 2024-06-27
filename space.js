@@ -29,6 +29,7 @@ class Space {
         $.history = [];
         $.historyPosition = 0;
         $.historyUpdateTimeoutId;
+        $.lintTimeoutId;
         $.lastTextareaValue = '';
         $.lastSelection = '';
         $.initialized = false;
@@ -37,7 +38,7 @@ class Space {
         $.utils = utils;
     }
 
-    // # Methods
+    // # Methods 
     init() {
         let $ = this;
         $.statusBarHTML = utils.html`
@@ -460,4 +461,14 @@ class Space {
             document.body.removeChild(textInput);
         });
     }
+
+    debounceLint() {
+        var context = this,
+            args = arguments;
+        clearTimeout(this.lintTimeoutId);
+        this.lintTimeoutId = setTimeout(function(){
+            context.lintTimeoutId = null;
+            context.lint.apply(context, args);
+        }, 200);
+    };
 };

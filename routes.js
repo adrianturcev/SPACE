@@ -314,9 +314,9 @@ function textareaKeydownRoute(e) {
         }
     }
     try {
-        space.lint();
+        space.debounceLint();
     } catch (error) {
-        space.lint()
+        space.debounceLint()
         console.error(error);
     }
 }
@@ -383,9 +383,9 @@ function textareaPasteRoute(e) {
     }
     space.updateCaret();
     try {
-        space.lint();
+        space.debounceLint();
     } catch (error) {
-        space.lint()
+        space.debounceLint()
         console.error(error);
     }
 }
@@ -412,9 +412,9 @@ function textareaInputRoute() {
     space.updateHorizontalScroll();
     space.updateCaret();
     try {
-        space.lint();
+        space.debounceLint();
     } catch (error) {
-        space.lint()
+        space.debounceLint()
         console.error(error);
     }
 }
