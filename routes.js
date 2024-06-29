@@ -516,10 +516,7 @@ function textareaInputRoute() {
 }
 
 function spaceScrollRoute(e) {
-    if (space.virtualScroller.lastScrollTop !== space.editor.scrollTop) {
-        space.virtualScroller.scrollHandler();
-        space.updateCurrentLine(true);
-    }
+    space.virtualScroller.scrollHandler();
 }
 
 window.spaceResizeTimeout = null;

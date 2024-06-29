@@ -40,14 +40,31 @@ class VirtualScroller {
     scrollHandler() {
         let $ = this;
         if ($.maxCounter < $.visibleNodesCount) {
-            $.parent.gutter.innerHTML = '';
-            $.parent.editor.style.setProperty('--scrollbarPadding', '0px');
-            $.init(0);
+            if ($.lastScrollTop !== $.parent.editor.scrollTop) {
+                $.parent.gutter.innerHTML = '';
+                $.parent.editor.style.setProperty('--scrollbarPadding', '0px');
+                $.init(0);
+            } else {
+                $.parent.editor.style.setProperty('--scrollbarPadding', '0px');
+                $.parent.gutter.style.transform =
+                    'translate(' + $.parent.editor.scrollLeft + 'px, ' + (0 * $.itemHeight) + 'px)';
+                $.parent.overlay.firstElementChild.style.transform =
+                    'translate(0px, ' + (0 * $.itemHeight) + 'px)';
+            }
         } else {
-            $.active = true;
-            // Prevents increasing width on h-scrolling
-            $.parent.editor.style.setProperty('--scrollbarPadding', 'var(--textareaPadding) * 4');
-            $.update($.getStartNode($.maxCounter));
+            if ($.lastScrollTop !== $.parent.editor.scrollTop) {
+                $.active = true;
+                // Prevents increasing width on h-scrolling
+                $.parent.editor.style.setProperty('--scrollbarPadding', 'var(--textareaPadding) * 4');
+                $.update($.getStartNode($.maxCounter));
+            } else {
+                $.parent.gutter.style.transform =
+                    'translate('
+                        + $.parent.editor.scrollLeft + 'px, '
+                        + ($.getStartNode($.maxCounter) * $.itemHeight) + 'px)';
+                $.parent.overlay.firstElementChild.style.transform =
+                    'translate(0px, ' + ($.getStartNode($.maxCounter) * $.itemHeight) + 'px)';
+            }
         }
     }
 
@@ -79,7 +96,7 @@ class VirtualScroller {
         $.parent.gutter.style.transform =
             'translate(' + $.parent.editor.scrollLeft + 'px, ' + (startNode * $.itemHeight) + 'px)';
         $.parent.overlay.firstElementChild.style.transform =
-            'translate(' + $.parent.editor.scrollLeft + 'px, ' + (startNode * $.itemHeight) + 'px)';
+            'translate(0px, ' + (startNode * $.itemHeight) + 'px)';
         $.lastStart = startNode;
         $.lastScrollTop = $.parent.editor.scrollTop;
         if ($.maxCounter >= $.visibleNodesCount) {
@@ -209,6 +226,7 @@ class VirtualScroller {
             }
         }
         $.setGutterWidth();
+        $.parent.updateCurrentLine(true);
     }
 
     diffItems(n, visible) {
