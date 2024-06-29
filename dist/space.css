@@ -190,6 +190,7 @@ space- .space-overlay {
 
 space- .space-overlay code {
     position: absolute;
+    will-change: transform;
 }
 
 space- .indent-guide {
