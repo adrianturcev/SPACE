@@ -246,7 +246,8 @@ function textareaKeydownRoute(e) {
             let rows = space.textarea.value.split('\n'),
                 selectionStartLineNumber =
                     space.textarea.value.slice(0, space.textarea.selectionStart).split('\n').length - 1,
-                selectionEndLineNumber = space.textarea.value.slice(0, space.textarea.selectionEnd).split('\n').length - 1,
+                selectionEndLineNumber =
+                    space.textarea.value.slice(0, space.textarea.selectionEnd).split('\n').length - 1,
                 newSelectionStart = space.textarea.selectionStart + 4,
                 newSelectionEnd =
                     space.textarea.selectionEnd
@@ -311,6 +312,96 @@ function textareaKeydownRoute(e) {
     } else if (!e.ctrlKey && e.shiftKey && e.altKey) {
         if (e.key == "f") {
             space.setTextarea(space.formatIndentation(space.textarea.value), space.textarea.selectionEnd);
+        }
+    } else if (!e.ctrlKey && !e.shiftKey && e.altKey) {
+        if (e.key == "ArrowDown") {
+            if (space.getSelectionStartCoordinates()[0] == space.getSelectionEndCoordinates()[0]) {
+                let rows = space.textarea.value.split('\n'),
+                    currentLineNumber = space.getCurrentLine(),
+                    currentLine = rows[space.getCurrentLine()].slice();
+                if (space.getCurrentLine() !== rows.length) {
+                    let nextLine = rows[space.getCurrentLine() + 1].slice();
+                    rows[space.getCurrentLine()] = nextLine;
+                    rows[space.getCurrentLine() + 1] = currentLine;
+                    space.setTextarea(rows.join('\n'));
+                    textareaInputRoute();
+                    space.setCarretLine(currentLineNumber + 1);
+                }
+            } else {
+                let rows = space.textarea.value.split('\n'),
+                    currentSelectionLineStart = space.getSelectionStartCoordinates()[0],
+                    currentSelectionLineEnd = space.getSelectionEndCoordinates()[0];
+                if (currentSelectionLineEnd < currentSelectionLineStart) {
+                    currentSelectionLineStart = space.getSelectionEndCoordinates()[0];
+                    currentSelectionLineEnd = space.getSelectionStartCoordinates()[0];
+                }
+                if (currentSelectionLineEnd != rows.length) {
+                    let currentLines = rows.slice(currentSelectionLineStart, currentSelectionLineEnd + 1),
+                        nextLine = rows[currentSelectionLineEnd + 1].slice();
+                    rows[currentSelectionLineStart] = nextLine;
+                    for (let i = currentSelectionLineStart, c = i + currentLines.length; i < c; i++) {
+                        rows[i + 1] = currentLines[i - currentSelectionLineStart];
+                    }
+                    if (currentSelectionLineEnd < currentSelectionLineStart) {
+                        space.setTextarea(
+                            rows.join('\n'),
+                            space.textarea.selectionEnd + nextLine.length + 1,
+                            space.textarea.selectionStart + nextLine.length + 1
+                        );
+                    } else {
+                        space.setTextarea(
+                            rows.join('\n'),
+                            space.textarea.selectionStart + nextLine.length + 1,
+                            space.textarea.selectionEnd + nextLine.length + 1
+                        );
+                    }
+                    textareaInputRoute();
+                }
+            }
+        } else if (e.key == "ArrowUp") {
+            if (space.getSelectionStartCoordinates()[0] == space.getSelectionEndCoordinates()[0]) {
+                let rows = space.textarea.value.split('\n'),
+                    currentLineNumber = space.getCurrentLine(),
+                    currentLine = rows[space.getCurrentLine()].slice();
+                if (space.getCurrentLine() !== 0) {
+                    let previousLine = rows[space.getCurrentLine() - 1].slice();
+                    rows[space.getCurrentLine()] = previousLine;
+                    rows[space.getCurrentLine() - 1] = currentLine;
+                    space.setTextarea(rows.join('\n'));
+                    textareaInputRoute();
+                    space.setCarretLine(currentLineNumber - 1);
+                }
+            } else {
+                let rows = space.textarea.value.split('\n'),
+                    currentSelectionLineStart = space.getSelectionStartCoordinates()[0],
+                    currentSelectionLineEnd = space.getSelectionEndCoordinates()[0];
+                if (currentSelectionLineEnd < currentSelectionLineStart) {
+                    currentSelectionLineStart = space.getSelectionEndCoordinates()[0];
+                    currentSelectionLineEnd = space.getSelectionStartCoordinates()[0];
+                }
+                if (currentSelectionLineStart != 0) {
+                    let currentLines = rows.slice(currentSelectionLineStart, currentSelectionLineEnd + 1),
+                        previousLine = rows[currentSelectionLineStart - 1].slice();
+                    rows[currentSelectionLineEnd] = previousLine;
+                    for (let i = currentSelectionLineStart, c = i + currentLines.length; i < c; i++) {
+                        rows[i - 1] = currentLines[i - currentSelectionLineStart];
+                    }
+                    if (currentSelectionLineEnd < currentSelectionLineStart) {
+                        space.setTextarea(
+                            rows.join('\n'),
+                            space.textarea.selectionEnd - previousLine.length - 1,
+                            space.textarea.selectionStart - previousLine.length - 1
+                        );
+                    } else {
+                        space.setTextarea(
+                            rows.join('\n'),
+                            space.textarea.selectionStart - previousLine.length - 1,
+                            space.textarea.selectionEnd - previousLine.length - 1
+                        );
+                    }
+                    textareaInputRoute();
+                }
+            }
         }
     }
     space.debounceLint();
