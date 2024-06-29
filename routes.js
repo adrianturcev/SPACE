@@ -1,3 +1,5 @@
+import VirtualScroller from "./virtualScroller";
+
 module.exports =
 (function (space) {
 // # Scheduling
@@ -514,8 +516,10 @@ function textareaInputRoute() {
 }
 
 function spaceScrollRoute(e) {
-    space.virtualScroller.scrollHandler();
-    space.updateCurrentLine(true);
+    if (space.virtualScroller.lastScrollTop !== space.editor.scrollTop) {
+        space.virtualScroller.scrollHandler();
+        space.updateCurrentLine(true);
+    }
 }
 
 window.spaceResizeTimeout = null;
