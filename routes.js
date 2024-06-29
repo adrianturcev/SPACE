@@ -287,6 +287,24 @@ function textareaKeydownRoute(e) {
             space.setTextarea(rows.join('\n'), newSelectionStart, newSelectionEnd);
             textareaInputRoute();
         }
+        if (e.key == "Enter") {
+            let rows = space.textarea.value.split('\n'),
+                currentLineNumber = space.getCurrentLine();
+            if (currentLineNumber == rows.length - 1) {
+                space.setTextarea(
+                    rows.join('\n')
+                    + '\n'
+                );
+            } else {
+                space.setTextarea(
+                    rows.slice(0, currentLineNumber + 1).join('\n')
+                    + '\n\n'
+                    + rows.slice(currentLineNumber + 1).join('\n')
+                );
+            }
+            textareaInputRoute();
+            space.setCarretLine(currentLineNumber + 1);
+        }
         if (e.key == "z") {
             e.preventDefault();
             if (space.historyPosition > 1) {

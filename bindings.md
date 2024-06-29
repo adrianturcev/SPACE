@@ -4,3 +4,4 @@
 - Ctrl + [ / ]: Indent/Outdent selection
 - Ctrl (+ Shift) + Z: Undo/Redo
 - Alt + Up/Down: Move Selection
+- Ctrl + Enter: Newline
