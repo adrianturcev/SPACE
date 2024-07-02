@@ -102,9 +102,9 @@ space- .currentLine::after {
     content: '';
     background-color: #FEFEFE;
     position: absolute;
-    left: calc(100% - var(--textareaPadding));
+    left: 100%;
     top: 0;
-    width: calc(var(--spaceWidth) - var(--gutterWidth) - var(--scrollbarPadding));
+    width: calc(var(--spaceWidth) - var(--gutterWidth) - var(--scrollbarPadding) - var(--textareaPadding));
     height: 100%;
     opacity: .1;
     pointer-events: none;
