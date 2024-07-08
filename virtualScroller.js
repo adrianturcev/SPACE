@@ -132,7 +132,7 @@ class VirtualScroller {
         for (let i = startNode, c = startNode + clamp; i < c; i++) {
             let line = document.createElement('span'),
                 spaceCounter = 0;
-            line.classList.add('space-Line');
+            line.classList.add('space-line');
             line.innerHTML = prismRows[i];
             for (let z = 0, x = line.children.length; z < x; z++) {
                 if (line.children[z].textContent == ' ') {
@@ -276,7 +276,7 @@ class VirtualScroller {
                 for (let i = n + visible - delta; i < n + visible; i++) {
                     let line = document.createElement('span'),
                         spaceCounter = 0;
-                    line.classList.add('space-Line');
+                    line.classList.add('space-line');
                     line.innerHTML = prismRows[i];
                     for (let z = 0, x = line.children.length; z < x; z++) {
                         if (line.children[z].textContent == ' ') {
@@ -337,7 +337,7 @@ class VirtualScroller {
                 for (let i = n; i < n + delta; i++) {
                     let line = document.createElement('span'),
                         spaceCounter = 0;
-                    line.classList.add('space-Line');
+                    line.classList.add('space-line');
                     line.innerHTML = prismRows[i];
                     for (let z = 0, x = line.children.length; z < x; z++) {
                         if (line.children[z].textContent == ' ') {
