@@ -6,9 +6,7 @@ space- {
     --scrollbarPadding: 0px;
     --fontSize: 14px;
     --borderRadius: 2px;
-    /* IF YOU UPDATE BELOW LINE, UPDATE THE NEXT ONE TOO. */
     --lineHeight: 1.35714285;
-    --lineHeightModuloOne: 0.35714285;
     --tabSize: 4;
     background-color: #242424;
 }
@@ -200,13 +198,13 @@ space- .indent-guide {
 
 space- .space-overlay .indent-guide::after {
     position: absolute;
-    left: calc(-50%);
-    top: calc((var(--fontSize) * (var(--lineHeightModuloOne) / 2) * -1));
-    content: '|';
-    color: #808080;
-    font-size: calc(var(--fontSize) * var(--lineHeight));
+    left: 0;
+    content: ' ';
+    color: transparent;
+    height: calc(var(--fontSize) * var(--lineHeight));
     opacity: 0.6;
     font-style: normal;
+    border-left: 1px solid #808080;
 }
 
 space- .space-overlay .token.space,
