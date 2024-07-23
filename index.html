@@ -116,8 +116,9 @@
             height: 100vh;
             position: absolute;
             top: 0px;
-            left: -17px;
+            left: -19px;
             border-left: 1px solid #525252;
+            border-bottom: 1px solid transparent;
         }
 
         #output ul li::after {
@@ -131,32 +132,33 @@
             background-color:#E06C75;
         }
 
-        #output ul li::before {
-            border-bottom: 1px solid transparent;
+        #output *:not(li)>ul::before {
+            display: none;
         }
 
         #output ul li {
             position: relative;
             background-color: #252525;
             margin-top: 1px;
+            box-shadow: 0 0 0 4px #252525;
         }
 
         #output ul li div {
             background-color: #525252;
-            padding: 5px;
+            padding: 7px;
             padding-left: 8px;
             border-radius: 3px;
         }
 
         #output>ul {
-            border-left: none;
+            border-left: 1px solid #525252;
             overflow: hidden;
             max-width: calc(50vw - 20px);
         }
 
         #output *:not(li)>ul {
             margin-top: 0;
-            border-left: none;
+            border-left: 1px solid #525252;
             overflow: hidden;
             max-width: calc(50vw - 20px);
         }
@@ -174,14 +176,20 @@
             margin-bottom: 4px;
         }
 
+        #output code {
+            display: flex;
+        }
+
         .type-boolean,
         .type-null,
         .type-number {
             color: #ae81ff;
+            margin-left: auto;
         }
 
         .type-string {
             color: #e6db74;
+            margin-left: auto;
         }
 
         .type-key {
