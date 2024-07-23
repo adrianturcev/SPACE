@@ -96,6 +96,75 @@
             padding-bottom: 3px;
         }
 
+        #output ul,
+        #output ol {
+            padding-left: 0;
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+
+        /**/
+        #output ul {
+            list-style-type: none;
+            padding-left: 17px;
+            margin-left: 2px;
+        }
+
+        #output ul li::before {
+            content: "";
+            display: block;
+            height: 100vh;
+            position: absolute;
+            top: 0px;
+            left: -17px;
+            border-left: 1px solid #525252;
+        }
+
+        #output ul li::after {
+            content: "";
+            display: block;
+            width: 100vw;
+            position: absolute;
+            top: calc(11px + 5px);
+            left: calc(-100vw - 5px);
+            height: 5px;
+            background-color:#E06C75;
+        }
+
+        #output ul li::before {
+            border-bottom: 1px solid transparent;
+        }
+
+        #output ul li {
+            position: relative;
+            background-color: #252525;
+            margin-top: 1px;
+        }
+
+        #output ul li div {
+            background-color: #525252;
+            padding: 5px;
+            padding-left: 8px;
+            border-radius: 3px;
+        }
+
+        #output>ul {
+            border-left: none;
+            overflow: hidden;
+            max-width: calc(50vw - 20px);
+        }
+
+        #output *:not(li)>ul {
+            border-left: none;
+            overflow: hidden;
+            max-width: calc(50vw - 20px);
+        }
+
+        #output ul li p {
+            margin: 0;
+            display: inline;
+        }
+
         li::marker {
             color: #E06C75;
         }
@@ -205,14 +274,14 @@
             <span id="outputText">OUTPUT</span>
             <div id="output" style="background-color: rgb(36, 36, 36);">
                 <ul class="DAMON-List">
-                    <li><code><span class="type-key">@context</span>: <span class="type-string"><a href="https://planviii.com/contexts/hello_human.jsonld">"https://planviii.com/contexts/hello_human.jsonld"</a></span></code>
-                    </li>
-                    <li><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P735">given_name</a></span>: <span class="type-string">"John"</span></code>
-                    </li>
-                    <li><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P2907">time_zone</a></span>: <span class="type-string">"UTC+00:00"</span></code>
-                    </li>
-                    <li><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P856">website</a></span>: <span class="type-string"><a href="http://example.com">"http://example.com"</a></span></code>
-                    </li>
+                    <li><div><code><span class="type-key">@context</span>: <span class="type-string"><a href="https://planviii.com/contexts/hello_human.jsonld">"https://planviii.com/contexts/hello_human.jsonld"</a></span></code>
+                    </div></li>
+                    <li><div><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P735">given_name</a></span>: <span class="type-string">"John"</span></code>
+                    </div></li>
+                    <li><div><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P2907">time_zone</a></span>: <span class="type-string">"UTC+00:00"</span></code>
+                    </div></li>
+                    <li><div><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P856">website</a></span>: <span class="type-string"><a href="http://example.com">"http://example.com"</a></span></code>
+                    </div></li>
                 </ul>
             </div>
         </div>
@@ -255,11 +324,41 @@
                         true,
                         helloHumanSchema
                     ));
+                updateListsItemsForStyling(output.getElementsByTagName('li'));
             } catch (error) {
                 console.error(error);
             }
             hljs.highlightAll();
         };
+        function updateListsItemsForStyling(listItems) {
+            let $ = this;
+            for (let i = 0, c = listItems.length; i < c; i++) {
+                let div = document.createElement('div');
+                for (let z = listItems[i].childNodes.length - 1; z >= 0; z--) {
+                    if (
+                        (
+                            listItems[i].childNodes[z].tagName
+                            && listItems[i].childNodes[z].tagName !== 'UL'
+                        ) || (
+                            listItems[i].childNodes[z].nodeType == Node.TEXT_NODE
+                            && listItems[i].childNodes[z].data != '\n'
+                            && listItems[i].childNodes[z].data != '\r\n'
+                        )
+                    ) {
+                        if (div.childNodes.length == 0) {
+                            div.appendChild(listItems[i].childNodes[z]);
+                        } else {
+                            div.insertBefore(listItems[i].childNodes[z], div.childNodes[0]);
+                        }
+                    }
+                }
+                if (listItems[i].firstElementChild) {
+                    listItems[i].insertBefore(div, listItems[i].firstElementChild);
+                } else {
+                    listItems[i].appendChild(div);
+                }
+            }
+        }
         hljs.highlightAll();
         space.setCarretLine(0);
     </script>
