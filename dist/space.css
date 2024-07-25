@@ -295,7 +295,7 @@ space- .space-statusBar {
     height: 27px;
     width: calc(100% - 4 * var(--textareaPadding));
     border-top: 1px solid #383838;
-    font-size: 12px;
+    font-size: calc(var(--fontSize) - 2px);
 }
 
 /* Reset */
@@ -366,16 +366,14 @@ space- .space-statusBar span {
 }
 
 space- .space-statusBar svg {
-    height: 18px;
+    height: 17px;
     margin-left: 4px;
 }
 
 
 @media only screen and (max-width: 639px) {
-    .space:not(span) .space-gutter,
-    .space:not(span) .space-editor textarea,
-    .space:not(span) .space-editor pre {
-        font-size: 10px;
+    space- {
+        --fontSize: 12px;
     }
 }
 
