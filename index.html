@@ -96,6 +96,10 @@
             padding-bottom: 3px;
         }
 
+        #output a:hover {
+            text-decoration: none;
+        }
+
         #output ul,
         #output ol {
             padding-left: 0;
@@ -141,6 +145,7 @@
             background-color: #252525;
             margin-top: 1px;
             box-shadow: 0 0 0 4px #252525;
+            white-space: nowrap;
         }
 
         #output ul li div {
@@ -153,14 +158,14 @@
         #output>ul {
             border-left: 1px solid #525252;
             overflow: hidden;
-            max-width: max(calc(50vw - 20px), calc(639px - 20px));
+            max-width: calc(max(50vw, 639px) - 20px);
         }
 
         #output *:not(li)>ul {
             margin-top: 0;
             border-left: 1px solid #525252;
             overflow: hidden;
-            max-width: max(calc(50vw - 20px), calc(639px - 20px));
+            max-width: calc(max(50vw, 639px) - 20px);
         }
 
         #output ul li p {
@@ -181,11 +186,13 @@
         .type-number {
             color: #ae81ff;
             margin-left: auto;
+            padding-left: 5px;
         }
 
         .type-string {
             color: #e6db74;
             margin-left: auto;
+            padding-left: 5px;
         }
 
         .type-key {
