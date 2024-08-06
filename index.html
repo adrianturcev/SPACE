@@ -133,7 +133,7 @@
             top: calc(11px + 5px);
             left: calc(-100vw - 5px);
             height: 5px;
-            background-color:#E06C75;
+            background-color:#FEFEFE;
         }
 
         #output *:not(li)>ul::before {
@@ -145,14 +145,18 @@
             background-color: #252525;
             margin-top: 1px;
             box-shadow: 0 0 0 4px #252525;
-            white-space: nowrap;
         }
 
         #output ul li div {
             background-color: #525252;
             padding: 7px;
-            padding-left: 8px;
+            padding-right: 0;
             border-radius: 3px;
+            overflow-y: hidden;
+        }
+
+        #output ul li div:hover {
+            background-color: #636363;
         }
 
         #output>ul {
@@ -179,25 +183,30 @@
 
         #output code {
             display: flex;
+            white-space: pre;
+        }
+
+        #output code span:last-child {
+            padding-right: 7px;
         }
 
         .type-boolean,
         .type-null,
         .type-number {
             color: #ae81ff;
-            margin-left: auto;
-            padding-left: 5px;
         }
 
         .type-string {
             color: #e6db74;
-            margin-left: auto;
-            padding-left: 5px;
         }
 
         .type-key {
             font-style: italic;
             color: #66d9ef;
+        }
+
+        #output .type-key a {
+            
         }
 
         .hljs-attr {
@@ -233,6 +242,10 @@
         @media only screen and (max-width: 639px) {
             #output {
                 font-size: 10px;
+            }
+
+            #output ul li::after {
+                top: calc(10px + 5px);
             }
         }
     </style>
