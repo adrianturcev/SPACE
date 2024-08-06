@@ -253,7 +253,7 @@ space- .space-caret {
 }
 
 space- .list-hyphen {
-    color: #E06C75;
+    color: #FEFEFE;
     font-style: normal;
 }
 
@@ -329,8 +329,8 @@ space- .space-statusBar button.error {
 
 /* Reset */
 space- .space-statusBar button::-moz-focus-inner {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 }
 
 space- .space-statusBar>a,
