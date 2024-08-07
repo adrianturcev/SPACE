@@ -229,14 +229,24 @@ class Space {
         }
         return [currentLine, $.textarea.selectionEnd - charsToCurrentLine];
     }
+
     /**
      * @param {number} lineNumber
+     * @param {number} columnNumber
      */
-    setCarretLine(lineNumber) {
+    setCarretAt(lineNumber, columnNumber) {
         let $ = this;
+        if (columnNumber == undefined) {
+            columnNumber = $.textarea.value.split('\n')[lineNumber].length;
+        }
         if (lineNumber == 0) {
-            $.textarea.selectionStart = 0;
+            $.textarea.selectionStart = columnNumber;
         } else {
+            let columnMin =
+                Math.min(
+                    columnNumber,
+                    $.textarea.value.split('\n')[lineNumber].length
+                );
             $.textarea.selectionStart =
                 $.textarea.value
                     .split('\n')
@@ -245,7 +255,7 @@ class Space {
                         return a + b;
                     }).length
                     + lineNumber
-                    + $.textarea.value.split('\n')[lineNumber].length;
+                    + columnNumber;
         }
         $.textarea.selectionEnd = $.textarea.selectionStart;
         $.textarea.focus();

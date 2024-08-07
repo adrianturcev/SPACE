@@ -71,7 +71,7 @@ function gutterClickRoute(e) {
         Array.from(space.gutter.children).indexOf(e.target) > -1
         || Array.from(space.gutter.children).indexOf(e.target.parentNode) > -1
     ) {
-        space.setCarretLine(parseInt(e.target.textContent.trim()) - 1);
+        space.setCarretAt(parseInt(e.target.textContent.trim()) - 1);
     }
 }
 
@@ -89,7 +89,7 @@ function containerMousedownRoute(e) {
         }
         if (carretLine - 1 < 0)
             carretLine = 1;
-        space.setCarretLine(carretLine - 1);
+        space.setCarretAt(carretLine - 1);
         space.textarea.focus();
     }
 }
@@ -235,6 +235,31 @@ function textareaKeydownRoute(e) {
             }
         }
     } else if (e.ctrlKey && !e.shiftKey && !e.altKey) {
+        // Correcting <textarea> default behavior...
+        if (e.key == "Backspace") {
+            let rows = space.textarea.value.split('\n'),
+                currentCoordinates = space.getSelectionStartCoordinates(),
+                currentLine = rows[currentCoordinates[0]],
+                currentLineToCaret = currentLine.slice(0, currentCoordinates[1]);
+            if (
+                space.textarea.selectionEnd == space.textarea.selectionStart
+                && /^ +$/.test(currentLineToCaret)
+            ) {
+                e.preventDefault();
+                let paddingRemoved = 0;
+                if (currentLineToCaret.length % 4 == 0) {
+                    rows[currentCoordinates[0]] = currentLine.slice(4);
+                    paddingRemoved = 4;
+                } else {
+                    rows[currentCoordinates[0]] = currentLine.slice(currentLineToCaret.length % 4);
+                    paddingRemoved = currentLineToCaret.length % 4;
+                }
+                space.setTextarea(rows.join('\n'));
+                textareaInputRoute();
+                space.setCarretAt(currentCoordinates[0], currentCoordinates[1] - paddingRemoved);
+            }
+            
+        }
         if (e.key == " ") {
             let value =
                 space.textarea.value.slice(0, space.textarea.selectionStart)
@@ -305,7 +330,7 @@ function textareaKeydownRoute(e) {
                 );
             }
             textareaInputRoute();
-            space.setCarretLine(currentLineNumber + 1);
+            space.setCarretAt(currentLineNumber + 1);
         }
         if (e.key == "z") {
             e.preventDefault();
@@ -345,7 +370,7 @@ function textareaKeydownRoute(e) {
                     rows[space.getCurrentLine() + 1] = currentLine;
                     space.setTextarea(rows.join('\n'));
                     textareaInputRoute();
-                    space.setCarretLine(currentLineNumber + 1);
+                    space.setCarretAt(currentLineNumber + 1);
                 }
             } else {
                 let rows = space.textarea.value.split('\n'),
@@ -389,7 +414,7 @@ function textareaKeydownRoute(e) {
                     rows[space.getCurrentLine() - 1] = currentLine;
                     space.setTextarea(rows.join('\n'));
                     textareaInputRoute();
-                    space.setCarretLine(currentLineNumber - 1);
+                    space.setCarretAt(currentLineNumber - 1);
                 }
             } else {
                 let rows = space.textarea.value.split('\n'),
@@ -506,7 +531,7 @@ function textareaInputRoute() {
         return;
     }
     // space.virtualScroller.inputHandler();
-
+    console.log('A');
     space.update();
     space.debounceHistoryUpdate();
     space.updateCurrentLine();
