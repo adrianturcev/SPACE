@@ -363,6 +363,20 @@ space- .space-statusBar div a {
 
 space- .space-statusBar span {
     color:#E06C75;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 50%;
+    background: #242424;
+}
+
+space- .space-statusBar span:hover {
+    position: absolute;
+    width: calc(100% - 2 * var(--textareaPadding));
+}
+
+space- .space-statusBar span:hover ~ * {
+    display: none;
 }
 
 space- .space-statusBar svg {
