@@ -4,7 +4,7 @@ const esbuild = require('esbuild');
     const ctx = await esbuild.context(
         {
             entryPoints: ['main.js'],
-            outfile: './dist/space.min.js',
+            outfile: 'client.min.js',
             bundle: true,
             // sourcemap: true,
             minify: true,
