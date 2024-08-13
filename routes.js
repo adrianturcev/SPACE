@@ -485,6 +485,17 @@ function textareaPasteRoute(e) {
         textEnd = space.textarea.value.slice(space.textarea.selectionEnd),
         value = textStart + clipboardText + textEnd,
         selectionEnd = space.textarea.selectionStart + clipboardText.length;
+    // JSON auto-conversion
+    try {
+        JSON.parse(value);
+        space.setTextarea(space.damon.jsonToDamon(value));
+        textareaInputRoute();
+        space.updateCaret();
+        space.debounceLint();
+        return;
+    } catch (error) {
+        // Don't care, proceed
+    }
     let rows = value.split('\n'),
         lastCaretPos = selectionEnd,
         charsToSelectionEndLine = 0,
@@ -530,8 +541,7 @@ function textareaInputRoute() {
     if (document.activeElement != space.textarea) {
         return;
     }
-    // space.virtualScroller.inputHandler();
-    console.log('A');
+    // space.virtualScroller.inputHandler(); 
     space.update();
     space.debounceHistoryUpdate();
     space.updateCurrentLine();

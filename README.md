@@ -28,6 +28,7 @@ HTML interactive documents
     - [x] auto-format indent on paste
     - [x] auto-format hyphens on paste
     - [x] formatting shortcut
+- [x] Pasting valid json produces damon
 
 ## Building
 
