@@ -83,6 +83,7 @@ class Space {
         </pre>
         <textarea
             class="space-textarea"
+            placeholder="Paste JSON or type DAMON"
             spellcheck="false"
             aria-labelledby=""
             aria-controls="space-statusBar0"
