@@ -30,6 +30,11 @@ HTML interactive documents
     - [x] formatting shortcut
 - [x] Pasting valid json produces damon
 
+## Limitations
+
+- [x] Implicitly-null keys syntax highlighting
+    - Would require droping Prismjs
+
 ## Building
 
 ### Development
