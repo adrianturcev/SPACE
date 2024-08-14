@@ -421,7 +421,9 @@ class Space {
         let $ = this;
         $.lastTextareaValue = $.textarea.value;
         $.textarea.value = value;
-        $.textarea.setSelectionRange(selectionStart, selectionEnd);
+        if (selectionStart !== null) {
+            $.textarea.setSelectionRange(selectionStart, selectionEnd);
+        }
     }
 
     lint() {
