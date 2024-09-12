@@ -13,11 +13,11 @@ Prism.languages.damon = {
 		pattern: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)\n/,
 		greedy: true
 	},
-	'number': /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b\n/i,
+	'number': /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/i,
 	'operator': /:/,
-	'boolean': /\b(?:false|true)\b\n/,
+	'boolean': /\b(?:false|true)\b/,
 	'null': {
-		pattern: /\bnull\b\n/,
+		pattern: /\bnull\b/,
 		alias: 'keyword'
 	},
 	'map': {
@@ -26,7 +26,7 @@ Prism.languages.damon = {
 	'list': {
 		pattern: /(\[\])\n/,
 	},
-	'punctuation': /[\{\}\[\]]/,
+	'punctuation': /[\{\}\[\],]/,
 };
 
 Prism.languages.webmanifest = Prism.languages.damon;
