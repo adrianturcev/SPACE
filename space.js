@@ -1,6 +1,7 @@
 const  utils = require('./utils.js');
 const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
+const  diff = require('diff');
 //#### Space
 // <space>
 module.exports =
@@ -23,6 +24,7 @@ class Space {
         $.caret = {};
         $.statusBar = {};
         $.copyButton = {};
+        $.diffButton = {};
         $.prism = prism;
         $.indentation = "    ";
         $.currentLine = 0;
@@ -72,6 +74,15 @@ class Space {
             fill="#FEFEFE"
             d="M 4,21 H 15 V 7 H 4 M 4,5 h 11 a -2,2 0 0 1 2,2 v 14 a -2,2 0 0 1 -2,2 H 4 A -2,2 0 0 1 2,21 V 7 A -2,2 0 0 1 4,5 M 7,1 h 12 a -2,2 0 0 1 2,2 V 17 H 19 V 3 H 7 Z"/>
     </svg>
+</button>
+<button class="space-diffButton">
+    Diff
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <title>set-left-right</title>
+        <path
+            fill="#FEFEFE"
+            d="M9,5C10.04,5 11.06,5.24 12,5.68C12.94,5.24 13.96,5 15,5A7,7 0 0,1 22,12A7,7 0 0,1 15,19C13.96,19 12.94,18.76 12,18.32C11.06,18.76 10.04,19 9,19A7,7 0 0,1 2,12A7,7 0 0,1 9,5M9,12C9,14.22 10.21,16.16 12,17.2C13.79,16.16 15,14.22 15,12C15,9.78 13.79,7.84 12,6.8C10.21,7.84 9,9.78 9,12Z" />
+    </svg>
 </button>`;
         $.innerHTML = utils.html`
 <div class="space-editor" data-state="js-off">
@@ -111,6 +122,7 @@ class Space {
         $.caret = $.dom.getElementsByClassName('space-caret')[0];
         $.statusBar = $.dom.getElementsByClassName('space-statusBar')[0];
         $.copyButton =  $.dom.getElementsByClassName('space-copyButton')[0];
+        $.diffButton =  $.dom.getElementsByClassName('space-copyButton')[0];
         $.virtualScroller = new VirtualScroller(this);
         $.editor.dataset.state = '';
         // Normalizing textarea content
@@ -472,6 +484,15 @@ class Space {
                 console.error(err.name, err.message);
             }
             document.body.removeChild(textInput);
+        });
+        $.diffButton = $.dom.getElementsByClassName('space-diffButton')[0];
+        $.diffButton.addEventListener('click', function (e) {
+            let textInput = document.createElement('textarea');
+            document.body.appendChild(textInput);
+            textInput.addEventListener('paste', function (e) {
+                let clipboardText = $.formatIndentation(e.clipboardData.getData("text").replace(new RegExp(/\r/g), ''));
+                
+            });
         });
     }
 
