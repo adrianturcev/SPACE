@@ -23,16 +23,19 @@
   "packageManager": "npm@10.2.4",
   "main": "main.js",
   "scripts": {
-    "watch": "node esbuild.js"
+    "watch": "npx grunt watch",
+    "build": "npx grunt dist"
   },
   "devDependencies": {
     "esbuild": "^0.21.3",
     "grunt": "^1.6.1",
     "grunt-contrib-concat": "^2.1.0",
+    "grunt-esbuild": "^1.0.1",
+    "grunt-exec": "^3.0.0",
     "tslib": "^2.6.2"
   },
   "dependencies": {
-    "damon2": "^2.1.17",
+    "damon2": "^2.1.27",
     "diff": "^5.2.0"
   }
 }

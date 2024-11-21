@@ -1,10 +1,23 @@
 module.exports = function(grunt) {
-    //var browserify = require('browserify');
-    //var nanohtml = require('nanohtml');
-    //var path = require('path');
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        exec: {
+            esbuild: {
+                command: 'node esbuild',
+            }
+        },
+        esbuild: {
+            options: {
+                buildFunction: require('esbuild').build
+            },
+            dist: {
+                entryPoints: ['main.js'],
+                outfile: 'client.min.js',
+                bundle: true,
+                minify: true
+            }
+        },
         concat: {
             js: {
                 options: {
@@ -21,8 +34,13 @@ module.exports = function(grunt) {
     });
 
     // Load the plugin that provides the tasks.
+    grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-esbuild');
+    grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat']);
+    grunt.registerTask('watch', ['exec:esbuild']);
+    grunt.registerTask('dist', ['esbuild', 'concat']);
 };

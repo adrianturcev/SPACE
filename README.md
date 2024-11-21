@@ -40,16 +40,14 @@ HTML interactive documents
 ### Development
 
 ```bash
-node esbuild
+npm run watch
 # Builds & watch ./out.js
 ```
 
 ### Distribuable
 
 ```bash
-node esbuild-dist
-# Builds and watch ./client.min.js
-grunt concat
+npm run build
 # Builds ./dist/space.min.js
 ```
 
@@ -60,7 +58,7 @@ grunt concat
     <link href="./dist/space.css" type="text/css" rel="stylesheet">
 <head>
 <body>
-    
+
     <div class="space"><textarea>- Example</textarea></div>
     <script src="./dist/space.min.js" type="text/javascript"></script>
     <script  type="text/javascript">
