@@ -40,7 +40,7 @@ class Space {
         $.utils = utils;
     }
 
-    // # Methods 
+    // # Methods
     init() {
         let $ = this;
         $.statusBarHTML = utils.html`
@@ -48,7 +48,7 @@ class Space {
     Spaces: <a href="https://github.com/adrianturcev/space/blob/master/bindings.md"><kbd>SPACE</kbd></a>
 </div>
 <a href="https://github.com/adrianturcev/damon/blob/master/language_reference.md">
-    DAMON 
+    DAMON
     <svg
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg">
@@ -491,7 +491,7 @@ class Space {
             document.body.appendChild(textInput);
             textInput.addEventListener('paste', function (e) {
                 let clipboardText = $.formatIndentation(e.clipboardData.getData("text").replace(new RegExp(/\r/g), ''));
-                
+
             });
         });
     }

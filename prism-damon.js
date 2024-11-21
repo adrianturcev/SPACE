@@ -1,6 +1,6 @@
 Prism.languages.damon = {
 	'list-hyphen': {
-		pattern: /(^\s*)(?:[*-]|\d+\.)/m,
+		pattern: /(^\s*)(?:[*-])/m,
 		lookbehind: true,
 		greedy: true
 	},
