@@ -323,6 +323,16 @@ class Space {
             $.history.length == 0
             || $.textarea.value != $.history[$.historyPosition - 1][0]
         ) {
+            if ($.history.length == 1) {
+                let newSelectionStart = $.textarea.selectionStart - ($.textarea.value.length - $.history[0][0].length);
+                if ($.history[0][0].length > $.textarea.value.length)
+                    newSelectionStart = $.textarea.selectionStart - ($.history[0][0].length - $.textarea.value.length);
+                $.history.push([
+                    $.history[0][0],
+                    newSelectionStart
+                ]);
+                $.historyPosition++;
+            }
             if ($.historyPosition != $.history.length) {
                 // Classic rewrite case
                 $.history = $.history.slice(0, $.historyPosition);
@@ -439,7 +449,7 @@ class Space {
     }
 
     lint() {
-        let $ = this;
+            let $ = this;
         try {
             $.damon.damonToMap($.textarea.value);
             $.statusBar.innerHTML = $.statusBarHTML;

@@ -258,7 +258,7 @@ function textareaKeydownRoute(e) {
                 textareaInputRoute();
                 space.setCarretAt(currentCoordinates[0], currentCoordinates[1] - paddingRemoved);
             }
-            
+
         }
         if (e.key == " ") {
             let value =
@@ -336,7 +336,8 @@ function textareaKeydownRoute(e) {
             e.preventDefault();
             if (space.historyPosition > 1) {
                 space.historyPosition -= 1;
-                space.setTextarea(space.history[space.historyPosition - 1][0], space.history[space.historyPosition - 1][1]);
+                let lastTextareaState = space.history[space.historyPosition - 1];
+                space.setTextarea(lastTextareaState[0], lastTextareaState[1]);
                 space.update();
                 space.virtualScroller.inputHandler(true);
                 space.textarea.blur();
@@ -347,7 +348,8 @@ function textareaKeydownRoute(e) {
             e.preventDefault();
             if (space.historyPosition < space.history.length) {
                 space.historyPosition += 1;
-                space.setTextarea(space.history[space.historyPosition - 1][0], space.history[space.historyPosition - 1][1]);
+                let lastTextareaState = space.history[space.historyPosition - 1];
+                space.setTextarea(lastTextareaState[0], lastTextareaState[1]);
                 space.update();
                 space.virtualScroller.inputHandler(true);
                 space.textarea.blur();
@@ -541,7 +543,7 @@ function textareaInputRoute() {
     if (document.activeElement != space.textarea) {
         return;
     }
-    // space.virtualScroller.inputHandler(); 
+    // space.virtualScroller.inputHandler();
     space.update();
     space.debounceHistoryUpdate();
     space.updateCurrentLine();
