@@ -36,9 +36,7 @@ module.exports = function(grunt) {
     // Load the plugin that provides the tasks.
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-esbuild');
-    grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default task(s).
     grunt.registerTask('watch', ['exec:esbuild']);
