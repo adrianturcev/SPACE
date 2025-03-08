@@ -1,7 +1,6 @@
 const  utils = require('./utils.js');
 const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
-const  diff = require('diff');
 //#### Space
 // <space>
 module.exports =
