@@ -389,6 +389,213 @@ space- .space-diffButton svg {
     margin-left: 4px;
 }
 
+space- form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 10px);
+    height: calc(var(--spaceHeight) - var(--textareaPadding) * 2);
+    background-color: #242424;
+    z-index: 999;
+}
+
+space- form textarea {
+    position: relative;
+    border: 1px solid white;
+}
+
+space- .space-diff {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 10px);
+    height: calc(var(--spaceHeight) - var(--textareaPadding) * 2);
+    background-color: #242424;
+    z-index: 999;
+    font-family: Consolas, Menlo, JuliaMono, Liberation Mono, monospace;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-y: auto;
+}
+
+space- .DAMON-Diff-legend {
+    padding: 5px;
+}
+
+space- .space-diff #damonDiffRed span {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background-color: crimson;
+}
+
+space- .space-diff #damonDiffBlue span {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background-color: blue;
+}
+
+space- .space-diff #damonDiffGreen span {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background-color: green;
+}
+
+space- .space-diff ul li.red-diff div {
+    background-color: crimson;
+}
+
+space- .space-diff ul li.blue-diff div {
+    background-color: blue;
+}
+
+space- .space-diff ul li.green-diff div {
+    background-color: green;
+}
+
+space- .space-diff a {
+    text-decoration: underline;
+    text-underline-position: under;
+    text-underline-offset: 2px;
+    text-decoration-style: dotted;
+    text-decoration-color: #FEFEFE;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+space- .space-diff a:hover {
+    text-decoration: none;
+}
+
+space- .space-diff ul,
+space- .space-diff ol {
+    padding-left: 0;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+/**/
+space- .space-diff ul {
+    list-style-type: none;
+    padding-left: 17px;
+    margin-left: 2px;
+}
+
+space- .space-diff ul li::before {
+    content: "";
+    display: block;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: -19px;
+    border-left: 1px solid #525252;
+    border-bottom: 1px solid transparent;
+}
+
+space- .space-diff ul li::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    position: absolute;
+    top: calc(11px + 5px);
+    left: calc(-100vw - 5px);
+    height: 5px;
+    background-color:#FEFEFE;
+}
+
+space- .space-diff *:not(li)>ul::before {
+    display: none;
+}
+
+space- .space-diff ul li {
+    position: relative;
+    background-color: #252525;
+    margin-top: 1px;
+    box-shadow: 0 0 0 4px #252525;
+}
+
+space- .space-diff ul li div {
+    background-color: #525252;
+    padding: 7px;
+    padding-right: 0;
+    border-radius: 3px;
+    overflow-y: hidden;
+}
+
+space- .space-diff ul li div:hover {
+    background-color: #636363;
+}
+
+space- .space-diff>ul {
+    margin-left: 51px;
+    border-left: 1px solid #525252;
+    overflow: hidden;
+    max-width: calc(max(50vw, 639px) - 20px);
+}
+
+space- .space-diff *:not(li)>ul {
+    margin-top: 0;
+    border-left: 1px solid #525252;
+    overflow: hidden;
+    max-width: calc(max(50vw, 639px) - 20px);
+}
+
+space- .space-diff ul li p {
+    margin: 0;
+    display: inline;
+}
+
+li {
+    margin-bottom: 4px;
+}
+
+space- .space-diff code {
+    display: flex;
+    white-space: pre;
+}
+
+space- .space-diff code span:last-child {
+    padding-right: 7px;
+}
+
+space- .space-diff .type-boolean,
+space- .space-diff .type-null,
+space- .space-diff .type-number {
+    color: #ae81ff;
+}
+
+space- .space-diff .type-string {
+    color: #e6db74;
+}
+
+space- .space-diff .type-key {
+    font-style: italic;
+    color: #66d9ef;
+    width: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+space- .space-diff .hljs-attr {
+    font-style: italic;
+}
+
+space- .space-diff code span:nth-of-type(2) a {
+    color: #e6db74;
+}
+
+space- .damon-line-number {
+    position: absolute;
+    padding: 7px;
+    background-color: #525252;
+    border-radius: 100px;
+    min-width: calc(45px - 14px);
+    text-align: center;
+}
 
 @media only screen and (max-width: 639px) {
     space- {

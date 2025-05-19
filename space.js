@@ -1,6 +1,7 @@
 const  utils = require('./utils.js');
 const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
+const  DamonUtils = require('damon-utils');
 //#### Space
 // <space>
 module.exports =
@@ -36,6 +37,7 @@ class Space {
         $.initialized = false;
         $.virtualScroller = {};
         $.damon = new DamonTwo();
+        $.damonUtils = new DamonUtils($.damon);
         $.utils = utils;
     }
 
@@ -496,12 +498,88 @@ class Space {
         });
         $.diffButton = $.dom.getElementsByClassName('space-diffButton')[0];
         $.diffButton.addEventListener('click', function (e) {
-            let textInput = document.createElement('textarea');
-            document.body.appendChild(textInput);
-            textInput.addEventListener('paste', function (e) {
-                let clipboardText = $.formatIndentation(e.clipboardData.getData("text").replace(new RegExp(/\r/g), ''));
+            try {
+                $.damon.damonToMap($.textarea.value);
+            } catch (error) {
+                alert('Invalid initial value.');
+                return;
+            }
+            $.diff(e);
+        });
+    }
 
+    diff(e) {
+        const $ = this;
+        if ($.dom.getElementsByTagName('form').length)
+            return
+        if ($.dom.getElementsByClassName('space-diff').length)
+            return
+        let form = document.createElement('form'),
+            labelDiv = document.createElement('div'),
+            sortCheckbox = document.createElement('input'),
+            sortLabel = document.createElement('label'),
+            textInput = document.createElement('textarea'),
+            closeFormButton = document.createElement('button');
+        sortCheckbox.type = "checkbox";
+        sortCheckbox.id = "spaceDiffSortCheckbox";
+        sortCheckbox.name = "sort";
+        sortLabel.textContent = "Sort";
+        sortLabel.setAttribute("for", "spaceDiffSortCheckbox");
+        textInput.className = 'space-diffTextarea';
+        form.style.position = 'absolute';
+        textInput.placeholder = 'Paste DAMON or JSON.';
+        closeFormButton.textContent = "Close";
+        closeFormButton.addEventListener('click', function (e) {
+            form.remove();
+        });
+        labelDiv.appendChild(sortCheckbox);
+        labelDiv.appendChild(sortLabel);
+        form.appendChild(labelDiv);
+        form.appendChild(textInput);
+        form.appendChild(closeFormButton);
+        $.dom.appendChild(form);
+        textInput.focus();
+        textInput.addEventListener('paste', function (e) {
+            let clipboardText = $.formatIndentation(e.clipboardData.getData("text").replace(new RegExp(/\r/g), ''));
+            let diffOutput = '',
+                spaceMap,
+                clipboardMap;
+            try {
+                spaceMap = $.damon.damonToMap($.textarea.value);
+            } catch (error) {
+                form.remove();
+                alert('Invalid initial value.');
+                return;
+            }
+            try {
+                JSON.parse(clipboardText);
+                clipboardMap = $.damon.jsonToMap(clipboardText);
+            } catch (error) {
+                try {
+                    clipboardMap = $.damon.damonToMap(clipboardText);
+                } catch (error) {
+                    form.remove();
+                    alert('Invalid clipboard value.');
+                    return;
+                }
+            }
+            if (sortCheckbox.checked) {
+                clipboardMap = $.damonUtils.sortMap(spaceMap, clipboardMap);
+            }
+            diffOutput = $.damonUtils.renderDiff(spaceMap, clipboardMap);
+            let outputDiv = document.createElement('div'),
+            closeButton = document.createElement('button');
+            outputDiv.className = 'space-diff';
+            outputDiv.innerHTML = diffOutput.innerHTML;
+            closeButton.textContent = "Close";
+            $.damonUtils.wrapListContentsForStyling(outputDiv.getElementsByTagName('li'));
+            outputDiv.appendChild(closeButton);
+            $.dom.append(outputDiv);
+            closeButton.addEventListener('click', function (e) {
+                outputDiv.remove();
             });
+            $.damonUtils.addLineNumbers(outputDiv.querySelectorAll('li[data-graph-arbo]'), $.textarea.value, outputDiv);
+            form.remove();
         });
     }
 

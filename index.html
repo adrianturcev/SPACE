@@ -92,8 +92,8 @@
             text-underline-offset: 2px;
             text-decoration-style: dotted;
             text-decoration-color: #FEFEFE;
-            padding-top: 3px;
-            padding-bottom: 3px;
+            margin-top: 3px;
+            margin-bottom: 3px;
         }
 
         #output a:hover {
@@ -160,6 +160,7 @@
         }
 
         #output>ul {
+            margin-left: 51px;
             border-left: 1px solid #525252;
             overflow: hidden;
             max-width: calc(max(50vw, 639px) - 20px);
@@ -203,10 +204,9 @@
         .type-key {
             font-style: italic;
             color: #66d9ef;
-        }
-
-        #output .type-key a {
-
+            width: 100px;
+            overflow: hidden;
+            text-align: center;
         }
 
         .hljs-attr {
@@ -215,6 +215,15 @@
 
         #output code span:nth-of-type(2) a {
             color: #e6db74;
+        }
+
+        .damon-line-number {
+            position: absolute;
+            padding: 7px;
+            background-color: #525252;
+            border-radius: 100px;
+            min-width: calc(45px - 14px);
+            text-align: center;
         }
 
         table {
@@ -299,15 +308,31 @@
             <span id="outputText">OUTPUT</span>
             <div id="output" style="background-color: rgb(36, 36, 36);">
                 <ul class="DAMON-List">
-                    <li><div><code><span class="type-key">@context</span>: <span class="type-string"><a href="https://planviii.com/contexts/hello_human.jsonld">"https://planviii.com/contexts/hello_human.jsonld"</a></span></code>
-                    </div></li>
-                    <li><div><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P735">given_name</a></span>: <span class="type-string">"John"</span></code>
-                    </div></li>
-                    <li><div><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P2907">time_zone</a></span>: <span class="type-string">"UTC+00:00"</span></code>
-                    </div></li>
-                    <li><div><code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P856">website</a></span>: <span class="type-string"><a href="https://example.com">"https://example.com"</a></span></code>
-                    </div></li>
+                    <li data-graph-arbo="0" aria-labelledby="damonLine1">
+                        <div>
+                            <code><span class="type-key">@context</span>: <span class="type-string"><a href="https://planviii.com/contexts/hello_human.jsonld">"https://planviii.com/contexts/hello_human.jsonld"</a></span></code>
+                        </div>
+                    </li>
+                    <li data-graph-arbo="1" aria-labelledby="damonLine2">
+                        <div>
+                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P735">given_name</a></span>: <span class="type-string">"John"</span></code>
+                        </div>
+                    </li>
+                    <li data-graph-arbo="2" aria-labelledby="damonLine3">
+                        <div>
+                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P2907">time_zone</a></span>: <span class="type-string">"UTC+00:00"</span></code>
+                        </div>
+                    </li>
+                    <li data-graph-arbo="3" aria-labelledby="damonLine4">
+                        <div>
+                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P856">website</a></span>: <span class="type-string"><a href="https://example.com">"https://example.com"</a></span></code>
+                        </div>
+                    </li>
                 </ul>
+                <div class="damon-line-number" id="damonLine1" style="left: 7px; top: 15px;">1</div>
+                <div class="damon-line-number" id="damonLine2" style="left: 7px; top: 54px;">2</div>
+                <div class="damon-line-number" id="damonLine3" style="left: 7px; top: 93px;">3</div>
+                <div class="damon-line-number" id="damonLine4" style="left: 7px; top: 132px;">4</div>
             </div>
         </div>
     </div>
@@ -350,41 +375,13 @@
                         true,
                         helloHumanSchema
                     ));
-                updateListsItemsForStyling(output.getElementsByTagName('li'));
+                damonUtils.wrapListContentsForStyling(output.getElementsByTagName('li'));
+                damonUtils.addLineNumbers(output.querySelectorAll('li[data-graph-arbo]'), space.textarea.value, output);
             } catch (error) {
                 console.error(error);
             }
             hljs.highlightAll();
         };
-        function updateListsItemsForStyling(listItems) {
-            let $ = this;
-            for (let i = 0, c = listItems.length; i < c; i++) {
-                let div = document.createElement('div');
-                for (let z = listItems[i].childNodes.length - 1; z >= 0; z--) {
-                    if (
-                        (
-                            listItems[i].childNodes[z].tagName
-                            && listItems[i].childNodes[z].tagName !== 'UL'
-                        ) || (
-                            listItems[i].childNodes[z].nodeType == Node.TEXT_NODE
-                            && listItems[i].childNodes[z].data != '\n'
-                            && listItems[i].childNodes[z].data != '\r\n'
-                        )
-                    ) {
-                        if (div.childNodes.length == 0) {
-                            div.appendChild(listItems[i].childNodes[z]);
-                        } else {
-                            div.insertBefore(listItems[i].childNodes[z], div.childNodes[0]);
-                        }
-                    }
-                }
-                if (listItems[i].firstElementChild) {
-                    listItems[i].insertBefore(div, listItems[i].firstElementChild);
-                } else {
-                    listItems[i].appendChild(div);
-                }
-            }
-        }
         hljs.highlightAll();
         space.setCarretAt(0);
     </script>
