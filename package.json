@@ -26,16 +26,27 @@
     "watch": "npx grunt watch",
     "build": "npx grunt dist"
   },
+  "dependencies": {
+      "damon-utils": "^1.4.4",
+      "damon2": "^2.3.2"
+  },
   "devDependencies": {
-    "esbuild": "^0.21.3",
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "eslint-plugin-jsdoc": "^50.6.17",
+    "globals": "^16.1.0",
+    "esbuild": "^0.25.4",
     "grunt": "^1.6.1",
+    "grunt-concurrent": "^3.0.0",
     "grunt-contrib-concat": "^2.1.0",
     "grunt-esbuild": "^1.0.1",
     "grunt-exec": "^3.0.0",
-    "tslib": "^2.6.2"
-  },
-  "dependencies": {
-    "damon-utils": "^1.4.3",
-    "damon2": "^2.3.1"
+    "tslib": "^2.8.1",
+    "husky": "^9.1.7",
+    "js-beautify": "^1.15.4",
+    "jsdom": "^26.1.0",
+    "mocha": "11.4.0",
+    "stylelint": "^16.19.1",
+    "stylelint-config-recommended": "^16.0.0"
   }
 }
