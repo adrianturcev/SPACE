@@ -103,8 +103,8 @@ space- .currentLine::after {
     left: 100%;
     top: 0;
     width: calc(var(--spaceWidth) - var(--gutterWidth) - var(--scrollbarPadding) - var(--textareaPadding));
-    height: 100%;
-    opacity: .1;
+    height: calc(100% - 2px);
+    opacity: .05;
     pointer-events: none;
 }
 
