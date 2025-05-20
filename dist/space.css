@@ -217,7 +217,7 @@ space- .space-overlay .token.space:before,
 space- .space-overlay .token.tab:not(:empty):before {
     position: absolute;
     color: #808080;
-    opacity: 0.6;
+    opacity: 0.5;
     font-style: normal;
 }
 
