@@ -1,9 +1,18 @@
 {
+    "include": ["Damon.js"],
     "compilerOptions": {
-        "checkJs": true,
         "target": "ES2022",
-        "moduleResolution": "NodeNext",
-        "module": "NodeNext"
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        // "checkJs": true,
+        "allowJs": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "dist",
+        "declarationMap": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "exactOptionalPropertyTypes": true,
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext"
     },
-    "exclude": ["node_modules", "**/node_modules/*"]
 }

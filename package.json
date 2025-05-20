@@ -27,7 +27,7 @@
     "build": "npx grunt dist"
   },
   "dependencies": {
-      "damon-utils": "^1.4.7",
+      "damon-utils": "^1.4.8",
       "damon2": "^2.3.4"
   },
   "devDependencies": {
