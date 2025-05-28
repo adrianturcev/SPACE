@@ -578,7 +578,7 @@ class Space {
             closeButton.addEventListener('click', function (e) {
                 outputDiv.remove();
             });
-            $.damonUtils.addLineNumbers(outputDiv.querySelectorAll('li[data-graph-arbo]'), $.textarea.value, outputDiv);
+            $.damonUtils.addLineNumbers($.textarea.value, outputDiv);
             form.remove();
         });
     }
