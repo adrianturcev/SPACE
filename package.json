@@ -27,8 +27,8 @@
     "build": "npx grunt dist"
   },
   "dependencies": {
-      "damon-utils": "^2.0.2",
-      "damon2": "^2.3.6"
+      "damon-utils": "^2.1.2",
+      "damon2": "^2.3.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",

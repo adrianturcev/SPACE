@@ -488,15 +488,59 @@ function textareaPasteRoute(e) {
         value = textStart + clipboardText + textEnd,
         selectionEnd = space.textarea.selectionStart + clipboardText.length;
     // JSON auto-conversion
-    try {
-        JSON.parse(value);
-        space.setTextarea(space.damon.jsonToDamon(value));
-        textareaInputRoute();
-        space.updateCaret();
-        space.debounceLint();
-        return;
-    } catch (error) {
-        // Don't care, proceed
+    if (
+        textStart + textEnd == ''
+        || space.textarea.selectionStart == 0 && space.textarea.selectionEnd == value.length - 1
+    ) {
+        try {
+            JSON.parse(value);
+            if ( // Array of primitive arrays
+                Array.isArray(value)
+                && value.map(x => Array.isArray(value)).indexOf(false) == -1
+                && value.map(
+                    x => x.map(
+                        y => !Array.isArray(y) && (typeof x !== 'object' || x == null)
+                    ).indexOf(false) == -1
+                ).indexOf(false) == -1
+            ) {
+                space.setTextarea(space.damonUtils.jsonToDamonTable(value));
+            } else {
+                space.setTextarea(space.damon.jsonToDamon(value));
+            }
+            textareaInputRoute();
+            space.updateCaret();
+            space.debounceLint();
+            return;
+        } catch (error) {
+            try {
+                space.damon.damonToMap(value);
+            } catch (error) {
+                let content = value,
+                    delimiter = /\r\n/.test(content) ? '\r\n' : '\n',
+                    lines = content.split(delimiter);
+                if (delimiter == '\n' && /\\*\n/.test(content)) {
+                    if (/[^\\]\\(\\\\)*\n/.test(content)) {
+                        let errorLine = content.split(/[^\\]\\(\\\\)*\n/)[0].split('\n').length;
+                        let error = new Error(
+                            "Error line " + errorLine + ": oddly escaped newline"
+                        );
+                        console.log(error);
+                    }
+                    let reversedcontent = content.split('').reverse().join(''),
+                        reversedmdLines = reversedcontent.split(/\n/);
+                    lines = reversedmdLines.map((x) => x.split('').reverse().join('')).reverse();
+                }
+                try {
+                    space.setTextarea(space.damonUtils.csvToDamonTable(value));
+                    textareaInputRoute();
+                    space.updateCaret();
+                    space.debounceLint();
+                    return;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
     }
     let rows = value.split('\n'),
         lastCaretPos = selectionEnd,
