@@ -1,27 +1,23 @@
 {
-  "name": "damon",
-  "version": "1.0.0",
-  "description": "A light map-language",
+  "name": "space",
+  "version": "2.0.0",
+  "description": "A DAMON text-editor.",
   "author": "Adrian Turcev",
   "license": "MPL-2.0",
-  "homepage": "https://github.com/adrianturcev/damon",
+  "homepage": "https://github.com/adrianturcev/SPACE",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adrianturcev/DAMON.git"
+    "url": "https://github.com/adrianturcev/SPACE.git"
   },
   "bugs": {
-    "url": "https://github.com/adrianturcev/DAMON/issues"
+    "url": "https://github.com/adrianturcev/SPACE/issues"
   },
   "keywords": [
-    "language",
-    "notation",
-    "map"
+    "text-editor",
+    "DAMON",
+    "JSON"
   ],
-  "engines": {
-    "node": "20.11.1"
-  },
-  "packageManager": "npm@10.2.4",
-  "main": "main.js",
+  "main": "Space.js",
   "scripts": {
     "watch": "npx grunt watch",
     "build": "npx grunt dist"

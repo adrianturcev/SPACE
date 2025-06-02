@@ -1,3 +1,3 @@
 (function () {
-    window.Space = require('./space.js');
+    window.Space = require('./Space.js');
 })();
