@@ -35,6 +35,12 @@ HTML interactive documents
 - [x] Implicitly-null keys syntax highlighting
     - Would require droping Prismjs
 
+## Install
+
+```bash
+npm install space2
+```
+
 ## Building
 
 ### Development
