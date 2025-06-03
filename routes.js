@@ -1,4 +1,4 @@
-import VirtualScroller from "./virtualScroller";
+var VirtualScroller = require("./virtualScroller");
 
 module.exports =
 (function (space) {
