@@ -182,7 +182,7 @@ space- textarea::selection {
 }
 
 space- .space-overlay {
-    font-style: italic;
+    /* font-style: italic; */
     color: #66d9ef;
 }
 
@@ -204,7 +204,7 @@ space- .space-overlay .indent-guide::after {
     height: calc(var(--fontSize) * var(--lineHeight));
     opacity: 0.6;
     font-style: normal;
-    border-left: 1px solid #808080;
+    border-left: 1px solid #FEFEFE;
 }
 
 space- .space-overlay .token.space,
