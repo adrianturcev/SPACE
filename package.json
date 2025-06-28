@@ -1,6 +1,6 @@
 {
   "name": "space2",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A DAMON text-editor.",
   "author": "Adrian Turcev",
   "license": "MPL-2.0",
@@ -23,26 +23,27 @@
     "build": "npx grunt dist"
   },
   "dependencies": {
-      "damon-utils": "^6.0.0",
-      "damon2": "^2.4.12"
+    "damon-utils": "^6.0.0",
+    "damon2": "^2.4.12",
+    "yet-another-js-utils": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
+    "esbuild": "^0.25.4",
     "eslint": "^9.27.0",
     "eslint-plugin-jsdoc": "^50.6.17",
     "globals": "^16.1.0",
-    "esbuild": "^0.25.4",
     "grunt": "^1.6.1",
     "grunt-concurrent": "^3.0.0",
     "grunt-contrib-concat": "^2.1.0",
     "grunt-esbuild": "^1.0.1",
     "grunt-exec": "^3.0.0",
-    "tslib": "^2.8.1",
     "husky": "^9.1.7",
     "js-beautify": "^1.15.4",
     "jsdom": "^26.1.0",
     "mocha": "11.4.0",
     "stylelint": "^16.19.1",
-    "stylelint-config-recommended": "^16.0.0"
+    "stylelint-config-recommended": "^16.0.0",
+    "tslib": "^2.8.1"
   }
 }

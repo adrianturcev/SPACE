@@ -1,4 +1,4 @@
-const  utils = require('./utils.js');
+const  utils = require('yet-another-js-utils');
 const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
 const  DamonUtils = require('damon-utils');
