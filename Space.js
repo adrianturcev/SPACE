@@ -253,14 +253,14 @@ class Space {
         if (columnNumber == undefined) {
             columnNumber = $.textarea.value.split('\n')[lineNumber].length;
         }
+        let columnMin =
+            Math.min(
+                columnNumber,
+                $.textarea.value.split('\n')[lineNumber].length
+            );
         if (lineNumber == 0) {
-            $.textarea.selectionStart = columnNumber;
+            $.textarea.selectionStart = columnMin;
         } else {
-            let columnMin =
-                Math.min(
-                    columnNumber,
-                    $.textarea.value.split('\n')[lineNumber].length
-                );
             $.textarea.selectionStart =
                 $.textarea.value
                     .split('\n')
@@ -269,7 +269,7 @@ class Space {
                         return a + b;
                     }).length
                     + lineNumber
-                    + columnNumber;
+                    + columnMin;
         }
         $.textarea.selectionEnd = $.textarea.selectionStart;
         $.textarea.focus();
