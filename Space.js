@@ -113,7 +113,7 @@ class Space {
             }
             $.dom.innerHTML = $.innerHTML;
         }
-        $.editor = $.dom.getElementsByClassName('space-editor')[0],
+        $.editor = $.dom.getElementsByClassName('space-editor')[0];
         $.gutter = $.dom.getElementsByClassName('space-gutter')[0];
         $.container = $.dom.getElementsByClassName('space-container')[0];
         $.overlay = $.dom.getElementsByClassName('space-overlay')[0];

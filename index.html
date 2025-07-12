@@ -187,7 +187,7 @@
             white-space: pre;
         }
 
-        #output code span:last-child {
+        #output code > span:last-child {
             padding-right: 7px;
         }
 
@@ -208,16 +208,46 @@
             text-align: center;
         }
 
+        #output .type-key:hover {
+            position: absolute;
+            width: auto;
+            min-width: 100px;
+            overflow: visible;
+            background-color: #636363;
+        }
+
         #output .type-key a {
             text-decoration: none;
         }
 
-        .hljs-attr {
-            font-style: italic;
+        #output .type-key:hover a {
+            text-decoration: underline;
+            text-underline-position: under;
+            text-underline-offset: 2px;
+            text-decoration-style: dotted;
+            text-decoration-color: #FEFEFE;
         }
 
-        #output code span:nth-of-type(2) a {
+        #output .type-key a span {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #output .type-key:hover + span {
+            margin-left: 100px;
+        }
+
+        #output .type-key:hover ~ span a {
+            text-decoration: none;
+        }
+
+        #output code span:nth-of-type(3) a {
             color: #e6db74;
+        }
+
+        .hljs-attr {
+            font-style: italic;
         }
 
         .damon-line-number {
@@ -312,29 +342,30 @@
                 <ul class="DAMON-List">
                     <li data-graph-arbo="0" aria-labelledby="damonLine1">
                         <div>
-                            <code><span class="type-key">@context</span>: <span class="type-string"><a href="https://planviii.com/contexts/hello_human.jsonld">"https://planviii.com/contexts/hello_human.jsonld"</a></span></code>
+                            <code><span class="type-key">@context</span><span class="operator">: </span><span class="type-string"><a href="https://planviii.com/contexts/hello_human.jsonld">"https://planviii.com/contexts/hello_human.jsonld"</a></span></code>
                         </div>
                     </li>
                     <li data-graph-arbo="1" aria-labelledby="damonLine2">
                         <div>
-                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P735">given_name</a></span>: <span class="type-string">"John"</span></code>
+                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P735"><span>given_name</span></a></span><span class="operator">: </span><span class="type-string">"John"</span></code>
                         </div>
                     </li>
                     <li data-graph-arbo="2" aria-labelledby="damonLine3">
                         <div>
-                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P2907">time_zone</a></span>: <span class="type-string">"UTC+00:00"</span></code>
+                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P2907"><span>time_zone</span></a></span><span class="operator">: </span><span class="type-string">"UTC+00:00"</span></code>
                         </div>
                     </li>
                     <li data-graph-arbo="3" aria-labelledby="damonLine4">
                         <div>
-                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P856">website</a></span>: <span class="type-string"><a href="https://example.com">"https://example.com"</a></span></code>
+                            <code><span class="type-key"><a href="https://www.wikidata.org/wiki/Property:P856"><span>website</span></a></span><span class="operator">: </span><span class="type-string"><a href="https://example.com">"https://example.com"</a></span></code>
                         </div>
                     </li>
                 </ul>
-                <div class="damon-line-number" id="damonLine1" style="left: 7px; top: 15px;">1</div>
-                <div class="damon-line-number" id="damonLine2" style="left: 7px; top: 54px;">2</div>
-                <div class="damon-line-number" id="damonLine3" style="left: 7px; top: 93px;">3</div>
-                <div class="damon-line-number" id="damonLine4" style="left: 7px; top: 132px;">4</div>
+                <div class="damon-line-number" id="damonLine1" style="top: 15px;">1</div>
+                <div class="damon-line-number" id="damonLine2" style="top: 54px;">2</div>
+                <div class="damon-line-number" id="damonLine3" style="top: 93px;">3</div>
+                <div class="damon-line-number" id="damonLine4" style="top: 132px;">4</div>
+
             </div>
         </div>
     </div>

@@ -182,12 +182,12 @@ space- textarea::selection {
 }
 
 space- .space-overlay {
-    /* font-style: italic; */
     color: #66d9ef;
 }
 
 space- .space-overlay code {
     position: absolute;
+    left: var(--textareaPadding);
     will-change: transform;
 }
 
