@@ -73,7 +73,6 @@ space- .space-gutter {
     background-color: #242424;
     color: #808080;
     z-index: 1;
-    will-change: transform;
 }
 
 space- .space-editor[data-state="js-off"] .space-gutter {

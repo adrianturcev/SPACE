@@ -129,6 +129,7 @@ class VirtualScroller {
                 .split('\n')
                 .map((x) => x.replace(/^<\/span>/, '') + '\n</span>');
         }
+
         for (let i = startNode, c = startNode + clamp; i < c; i++) {
             let line = document.createElement('span'),
                 spaceCounter = 0;
@@ -196,37 +197,39 @@ class VirtualScroller {
 
     update(startNode) {
         let $ = this;
-        $.resetProperties();
-        // let's initialize, then guards against going past space height
-        if ($.parent.gutter.firstElementChild) {
-            if ($.lastScrollTop != $.parent.editor.scrollTop) {
-                if (startNode > ($.maxCounter - $.visibleNodesCount)) {
-                    if ($.maxCounter - $.visibleNodesCount > 0) {
-                        startNode = $.maxCounter - $.visibleNodesCount;
+        requestAnimationFrame((function () {
+            $.resetProperties();
+            // Initializes, then guards against going past space height
+            if ($.parent.gutter.firstElementChild) {
+                if ($.lastScrollTop != $.parent.editor.scrollTop) {
+                    if (startNode > ($.maxCounter - $.visibleNodesCount)) {
+                        if ($.maxCounter - $.visibleNodesCount > 0) {
+                            startNode = $.maxCounter - $.visibleNodesCount;
+                        } else {
+                            startNode = 0;
+                        }
+                    }
+                    $.diffItems(startNode, $.visibleNodesCount);
+                    $.parent.gutter.style.transform =
+                        'translate(' + $.parent.editor.scrollLeft + 'px, ' + (startNode * $.itemHeight) + 'px)';
+                    $.parent.overlay.firstElementChild.style.transform =
+                        'translate(0px, ' + (startNode * $.itemHeight) + 'px)';
+                    $.lastScrollTop = $.parent.editor.scrollTop;
+                } else {
+                    if (/^translate\(.+px, .+px\)$/.test($.parent.gutter.style.transform)) {
+                        $.parent.gutter.style.transform =
+                            'translate('
+                            + $.parent.editor.scrollLeft
+                            + 'px, '
+                            + $.parent.gutter.style.transform.split(', ')[1];
                     } else {
-                        startNode = 0;
+                        throw new Error('You need to update this regex.');
                     }
                 }
-                $.diffItems(startNode, $.visibleNodesCount);
-                $.parent.gutter.style.transform =
-                    'translate(' + $.parent.editor.scrollLeft + 'px, ' + (startNode * $.itemHeight) + 'px)';
-                $.parent.overlay.firstElementChild.style.transform =
-                    'translate(0px, ' + (startNode * $.itemHeight) + 'px)';
-                $.lastScrollTop = $.parent.editor.scrollTop;
-            } else {
-                if (/^translate\(.+px, .+px\)$/.test($.parent.gutter.style.transform)) {
-                    $.parent.gutter.style.transform =
-                        'translate('
-                        + $.parent.editor.scrollLeft
-                        + 'px, '
-                        + $.parent.gutter.style.transform.split(', ')[1];
-                } else {
-                    throw new Error('You need to update this regex.');
-                }
             }
-        }
-        $.setGutterWidth();
-        $.parent.updateCurrentLine(true);
+            $.setGutterWidth();
+            $.parent.updateCurrentLine(true);
+        }));
     }
 
     diffItems(n, visible) {
@@ -247,7 +250,7 @@ class VirtualScroller {
                     lineNumber.appendChild(span);
                     $.parent.gutter.appendChild(lineNumber);
                 }
-                
+
                 // Textarea Height & width
                 let rows = $.parent.textarea.value.split('\n');
                 $.parent.textarea.rows = rows.length + 1;
