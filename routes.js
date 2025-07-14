@@ -464,7 +464,8 @@ function textareaCutRoute(e) {
         space.textarea.setSelectionRange(currentLineStart, currentLineEnd);
         space.lastTextareaValue = space.textarea.value;
         document.execCommand('cut');
-        space.updateCaret();
+        textareaInputRoute();
+        spaceScrollRoute();
     }
 }
 
@@ -508,8 +509,7 @@ function textareaPasteRoute(e) {
                 space.setTextarea(space.damon.jsonToDamon(value));
             }
             textareaInputRoute();
-            space.updateCaret();
-            space.debounceLint();
+            spaceScrollRoute();
             return;
         } catch (error) {
             try {
@@ -533,8 +533,7 @@ function textareaPasteRoute(e) {
                 try {
                     space.setTextarea(space.damonUtils.csvToDamonTable(value));
                     textareaInputRoute();
-                    space.updateCaret();
-                    space.debounceLint();
+                    spaceScrollRoute();
                     return;
                 } catch (error) {
                     console.log(error);
@@ -568,9 +567,8 @@ function textareaPasteRoute(e) {
             + coordinates[1];
         space.setTextarea(value, selectionStart);
         textareaInputRoute();
+        spaceScrollRoute();
     }
-    space.updateCaret();
-    space.debounceLint();
 }
 
 // # virtualScroller.js
