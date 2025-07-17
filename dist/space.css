@@ -187,7 +187,6 @@ space- .space-overlay {
 space- .space-overlay code {
     position: absolute;
     left: var(--textareaPadding);
-    will-change: transform;
 }
 
 space- .indent-guide {
