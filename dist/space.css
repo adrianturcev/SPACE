@@ -262,6 +262,10 @@ space- .null {
     font-style: normal;
 }
 
+space- .number:has(+ .operator) {
+    color: #66d9ef;
+}
+
 space- .string {
     color: #FFEE99;
     font-style: normal;
