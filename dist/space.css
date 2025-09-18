@@ -20,6 +20,8 @@ space- .space-editor {
     /* Fallback */
     overflow: auto;
     overflow: overlay;
+    /* Weird scrollbar bug */
+    overflow-x: hidden;
     tab-size: var(--tabSize);
     font-size: var(--fontSize);
     line-height: var(--lineHeight);
