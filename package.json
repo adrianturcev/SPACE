@@ -1,6 +1,6 @@
 {
   "name": "space2",
-  "version": "2.0.29",
+  "version": "2.0.30",
   "description": "A DAMON text-editor.",
   "author": "Adrian Turcev",
   "license": "MPL-2.0",
@@ -23,7 +23,7 @@
     "build": "npx grunt dist"
   },
   "dependencies": {
-    "damon-utils": "^7.3.0",
+    "damon-utils": "^7.3.1",
     "damon2": "^4.2.0",
     "yet-another-js-utils": "^1.1.4"
   },
