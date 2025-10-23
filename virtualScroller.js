@@ -41,7 +41,6 @@ class VirtualScroller {
         let $ = this;
         if ($.maxCounter < $.visibleNodesCount) {
             if ($.lastScrollTop !== $.parent.editor.scrollTop) {
-                $.parent.gutter.innerHTML = '';
                 $.parent.editor.style.setProperty('--scrollbarPadding', '0px');
                 $.init(0);
             } else {
@@ -83,15 +82,32 @@ class VirtualScroller {
         }
         let clamp = Math.max(1, Math.min($.maxCounter - startNode, $.visibleNodesCount));
         // Gutter
-        for (let i = startNode; i < startNode + clamp; i++) {
-            let lineNumber = document.createElement('div'),
-                span = document.createElement('span');
-            let maxWhitespace = ($.maxCounter + '').length,
-                currentSpace = (i + 1 + '').length,
-                currentWhitespace = maxWhitespace - currentSpace;
-            span.textContent = ' '.repeat(currentWhitespace) + (i + 1);
-            lineNumber.appendChild(span);
-            $.parent.gutter.appendChild(lineNumber);
+        if ($.parent.gutter.innerHTML === '') {
+            for (let i = startNode; i < startNode + clamp; i++) {
+                let lineNumber = document.createElement('div'),
+                    span = document.createElement('span');
+                let maxWhitespace = ($.maxCounter + '').length,
+                    currentSpace = (i + 1 + '').length,
+                    currentWhitespace = maxWhitespace - currentSpace;
+                span.textContent = ' '.repeat(currentWhitespace) + (i + 1);
+                lineNumber.appendChild(span);
+                $.parent.gutter.appendChild(lineNumber);
+            }
+        } else {
+            let gutterIndex = 0;
+            for (let i = startNode; i < startNode + clamp; i++) {
+                let lineNumber = document.createElement('div'),
+                    span = document.createElement('span');
+                let maxWhitespace = ($.maxCounter + '').length,
+                    currentSpace = (i + 1 + '').length,
+                    currentWhitespace = maxWhitespace - currentSpace;
+                span.textContent = ' '.repeat(currentWhitespace) + (i + 1);
+                lineNumber.appendChild(span);
+                if (lineNumber.outerHTML !== $.parent.gutter.children[gutterIndex].outerHTML) {
+                    $.parent.gutter.children[gutterIndex].replaceWith(lineNumber);
+                }
+                gutterIndex++;
+            }
         }
         $.parent.gutter.style.transform =
             'translate(' + $.parent.editor.scrollLeft + 'px, ' + (startNode * $.itemHeight) + 'px)';
@@ -135,14 +151,18 @@ class VirtualScroller {
                 spaceCounter = 0;
             line.classList.add('space-line');
             line.innerHTML = prismRows[i];
-            for (let z = 0, x = line.children.length; z < x; z++) {
-                if (line.children[z].textContent == ' ') {
+            for (let z = 0, x = line.childNodes.length; z < x; z++) {
+                if (
+                    line.childNodes[z].tagName
+                    && line.childNodes[z].textContent == ' '
+                ) {
                     spaceCounter++;
                     if (spaceCounter == 4) {
                         spaceCounter = 0;
                         line.children[z - 3].classList.add('indent-guide');
                     }
                 } else {
+                    spaceCounter = 0;
                     break;
                 }
             }
@@ -281,14 +301,18 @@ class VirtualScroller {
                         spaceCounter = 0;
                     line.classList.add('space-line');
                     line.innerHTML = prismRows[i];
-                    for (let z = 0, x = line.children.length; z < x; z++) {
-                        if (line.children[z].textContent == ' ') {
+                    for (let z = 0, x = line.childNodes.length; z < x; z++) {
+                        if (
+                            line.childNodes[z].tagName
+                            && line.childNodes[z].textContent == ' '
+                        ) {
                             spaceCounter++;
                             if (spaceCounter == 4) {
                                 spaceCounter = 0;
                                 line.children[z - 3].classList.add('indent-guide');
                             }
                         } else {
+                            spaceCounter = 0;
                             break;
                         }
                     }
@@ -342,14 +366,18 @@ class VirtualScroller {
                         spaceCounter = 0;
                     line.classList.add('space-line');
                     line.innerHTML = prismRows[i];
-                    for (let z = 0, x = line.children.length; z < x; z++) {
-                        if (line.children[z].textContent == ' ') {
+                    for (let z = 0, x = line.childNodes.length; z < x; z++) {
+                        if (
+                            line.childNodes[z].tagName
+                            && line.childNodes[z].textContent == ' '
+                        ) {
                             spaceCounter++;
                             if (spaceCounter == 4) {
                                 spaceCounter = 0;
                                 line.children[z - 3].classList.add('indent-guide');
                             }
                         } else {
+                            spaceCounter = 0;
                             break;
                         }
                     }

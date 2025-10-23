@@ -1,7 +1,7 @@
 space- {
     --gutterWidth: 50px;
     --spaceWidth: 100vw;
-    --spaceHeight: calc((100vh / 2) + 10px - 28px);
+    --spaceHeight: calc((100vh / 2) + 10px);
     --textareaPadding: 5px;
     --scrollbarPadding: 0px;
     --fontSize: 14px;
@@ -15,7 +15,7 @@ space- .space-editor {
     position: relative;
     font-family: Consolas, Menlo, JuliaMono, Liberation Mono, monospace;
     width: var(--spaceWidth);
-    height: calc(var(--spaceHeight) - var(--textareaPadding) * 2);
+    height: calc(var(--spaceHeight) - var(--textareaPadding) * 2 - 28px);
     border-radius: var(--borderRadius);
     /* Fallback */
     overflow: auto;

@@ -450,7 +450,7 @@ class Space {
     }
 
     lint() {
-            let $ = this;
+        let $ = this;
         try {
             $.damon.damonToMap($.textarea.value);
             $.statusBar.innerHTML = $.statusBarHTML;
