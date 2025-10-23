@@ -47,12 +47,14 @@ space.textarea
 space.textarea
     .addEventListener('paste', textareaPasteRoute)
 
+//### windowLoadRoute
 function windowLoadRoute(e) {
     // Removing plugin-less code and avoiding duplication
     space.overlay.firstElementChild.innerHTML = '';
     space.gutter.innerHTML = '';
     space.update();
     space.updateCurrentLine();
+    space.lastTextareaValue = space.textarea.value;
     space.initialized = true;
 }
 
@@ -601,6 +603,7 @@ function spaceScrollRoute(e) {
 window.spaceResizeTimeout = null;
 function windowResizeRoute(e) {
     // Throtles resize events
+    console.log('B');
     if (spaceResizeTimeout) {clearTimeout(spaceResizeTimeout)};
     window.spaceResizeTimeout = setTimeout(function() {
         let previousScrollTop = space.editor.scrollTop;

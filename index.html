@@ -400,24 +400,13 @@
             )
                 return;
             try {
-                let dummyDiv = document.createElement('div');
-                dummyDiv.appendChild(
+                output.innerHTML = "";
+                output.appendChild(
                     space.damonUtils.mapToHtmlList(
                         space.damon.damonToMap(space.textarea.value),
                         true,
                         helloHumanSchema
-                    )
-                );
-                function onChildListChange(mutationList, observer) {
-                    for (const mutation of mutationList) {
-                        if (mutation.type === "childList") {
-                            console.log(mutation);
-                        }
-                    }
-                }
-                let observer = new MutationObserver(onChildListChange);
-                observer.observe(output, { childList: true });
-                space.utils.diffVDomAndUpdate(output, dummyDiv, output);
+                    ));
                 space.damonUtils.wrapListContentsForStyling(output.getElementsByTagName('li'));
                 space.damonUtils.addLineNumbers(space.textarea.value, output);
             } catch (error) {
