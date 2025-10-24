@@ -136,7 +136,7 @@ class Space {
         $.gutter.innerHTML = '';
         $.update();
         $.updateCurrentLine();
-        $.lastTextareaValue = space.textarea.value;
+        $.lastTextareaValue = $.textarea.value;
         $.initialized = true;
         $.lint();
     }
