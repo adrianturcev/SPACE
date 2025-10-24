@@ -132,12 +132,12 @@ class Space {
         $.routes = require('./routes.js')(this);
         // Removing plugin-less code and avoiding duplication
         // See ./routes.js
-        space.overlay.firstElementChild.innerHTML = '';
-        space.gutter.innerHTML = '';
-        space.update();
-        space.updateCurrentLine();
-        space.lastTextareaValue = space.textarea.value;
-        space.initialized = true;
+        $.overlay.firstElementChild.innerHTML = '';
+        $.gutter.innerHTML = '';
+        $.update();
+        $.updateCurrentLine();
+        $.lastTextareaValue = space.textarea.value;
+        $.initialized = true;
         $.lint();
     }
 
