@@ -8,8 +8,6 @@ module.exports =
 // Won't auto-load plugins otherwise
 space.update();
 space.historyUpdate();
-window
-    .addEventListener('load', windowLoadRoute);
 
 space.editor
     .addEventListener('focusin', spaceFocusInRoute);
@@ -46,17 +44,6 @@ space.textarea
 
 space.textarea
     .addEventListener('paste', textareaPasteRoute)
-
-//### windowLoadRoute
-function windowLoadRoute(e) {
-    // Removing plugin-less code and avoiding duplication
-    space.overlay.firstElementChild.innerHTML = '';
-    space.gutter.innerHTML = '';
-    space.update();
-    space.updateCurrentLine();
-    space.lastTextareaValue = space.textarea.value;
-    space.initialized = true;
-}
 
 function spaceFocusInRoute(e) {
     space.utils.addDataState(space.editor, 'focused');

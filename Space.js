@@ -130,6 +130,14 @@ class Space {
         $.textarea.value = $.formatIndentation($.textarea.value.replaceAll(/\r/g, ''));
         // $.virtualScroller.init();
         $.routes = require('./routes.js')(this);
+        // Removing plugin-less code and avoiding duplication
+        // See ./routes.js
+        space.overlay.firstElementChild.innerHTML = '';
+        space.gutter.innerHTML = '';
+        space.update();
+        space.updateCurrentLine();
+        space.lastTextareaValue = space.textarea.value;
+        space.initialized = true;
         $.lint();
     }
 
