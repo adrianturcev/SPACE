@@ -12,9 +12,9 @@
     <script type="application/ld+json">
         {
             "@context": "https://planviii.com/contexts/hello_human.jsonld",
-            "given_name": "Adrian",
+            "given_name": "John",
             "time_zone": "UTC+01:00",
-            "website": "http://planviii.com"
+            "website": "http://example.com"
         }
     </script>
     <style>
@@ -302,9 +302,9 @@
                     </pre>
                     <textarea class="space-textarea" placeholder="Paste JSON/CSV or write DAMON" spellcheck="false" aria-labelledby="" maxlength="500000">
 - @context: "https://planviii.com/contexts/hello_human.jsonld"
-- given_name: "Adrian"
+- given_name: "John"
 - time_zone: "UTC+01:00"
-- website: "http://planviii.com"</textarea>
+- website: "http://example.com"</textarea>
                     <ul class="space-suggestions"></ul>
                 </div>
             </div>
@@ -385,14 +385,16 @@
         let options = document.getElementsByTagName('input'),
             output = document.getElementById('output'),
             space = new Space(document.getElementsByTagName('space-')[0], Prism);
-        space.init();
-        space.textarea
-            .addEventListener('keydown', update);
-        space.textarea
-            .addEventListener('input', update);
-        space.textarea
-            .addEventListener('paste', update);
-        update(); // Responsive
+        window.addEventListener('load', function () {
+            space.init();
+            space.textarea
+                .addEventListener('keydown', update);
+            space.textarea
+                .addEventListener('input', update);
+            space.textarea
+                .addEventListener('paste', update);
+            update(); // Responsive
+        });
         function update(e) {
             if (
                 e

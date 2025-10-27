@@ -69,7 +69,9 @@ npm run build
     <script src="./dist/space.min.js" type="text/javascript"></script>
     <script  type="text/javascript">
         const space = new Space(document.getElementsByClassName('space')[0], Prism);
-        space.init();
+        window.addEventListener('load', function () {
+            space.init();
+        });
     </script>
 </body>
 ```
