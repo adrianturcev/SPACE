@@ -592,6 +592,10 @@ space- .space-diff code span:nth-of-type(2) a {
     color: #e6db74;
 }
 
+space- .space-diff button {
+    margin: 10px;
+}
+
 space- .damon-line-number {
     position: absolute;
     padding: 7px;
