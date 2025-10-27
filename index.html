@@ -394,6 +394,7 @@
             space.textarea
                 .addEventListener('paste', update);
             update(); // Responsive
+            space.setCarretAt(0, 0);
         });
         function update(e) {
             if (
@@ -415,7 +416,6 @@
                 console.error(error);
             }
         };
-        space.setCarretAt(0, 0);
     </script>
 </body>
 
