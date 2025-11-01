@@ -4,10 +4,6 @@ module.exports =
 (function (space) {
 // # Scheduling
 // ## Space.js
-// Filling the overlay as to trigger Prismjs on load
-// Won't auto-load plugins otherwise
-space.update();
-space.historyUpdate();
 
 space.editor
     .addEventListener('focusin', spaceFocusInRoute);

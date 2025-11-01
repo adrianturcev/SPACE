@@ -128,12 +128,13 @@ class Space {
         $.editor.dataset.state = '';
         // Normalizing textarea content
         $.textarea.value = $.formatIndentation($.textarea.value.replaceAll(/\r/g, ''));
-        // $.virtualScroller.init();
+        // Forcing prism to load plugins...
+        let grammar = $.prism.languages.damon;
+        $.prism.hooks.run('before-highlight', { grammar });
+        // Starting history
+        $.historyUpdate();
+        // Loading routes
         $.routes = require('./routes.js')(this);
-        // Removing plugin-less code and avoiding duplication
-        // See ./routes.js
-        $.overlay.firstElementChild.innerHTML = '';
-        $.gutter.innerHTML = '';
         $.update();
         $.updateCurrentLine();
         $.lastTextareaValue = $.textarea.value;

@@ -71,6 +71,7 @@ npm run build
         const space = new Space(document.getElementsByClassName('space')[0], Prism);
         window.addEventListener('load', function () {
             space.init();
+            space.setCarretAt(0, 0);
         });
     </script>
 </body>
