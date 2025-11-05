@@ -479,11 +479,11 @@ function textareaPasteRoute(e) {
         || space.textarea.selectionStart == 0 && space.textarea.selectionEnd == value.length - 1
     ) {
         try {
-            JSON.parse(value);
+            let object = JSON.parse(value);
             if ( // Array of primitive arrays
-                Array.isArray(value)
-                && value.map(x => Array.isArray(value)).indexOf(false) == -1
-                && value.map(
+                Array.isArray(object)
+                && object.map(x => Array.isArray(object)).indexOf(false) == -1
+                && object.map(
                     x => x.map(
                         y => !Array.isArray(y) && (typeof x !== 'object' || x == null)
                     ).indexOf(false) == -1
@@ -491,7 +491,9 @@ function textareaPasteRoute(e) {
             ) {
                 space.setTextarea(space.damonUtils.jsonToDamonTable(value));
             } else {
-                space.setTextarea(space.damon.jsonToDamon(value));
+                let map = space.damon.jsonToMap(value);
+                map.headless = true;
+                space.setTextarea(space.damon.mapToDamon(map));
             }
             textareaInputRoute();
             spaceScrollRoute();
