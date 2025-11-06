@@ -480,20 +480,98 @@ function textareaPasteRoute(e) {
     ) {
         try {
             let object = JSON.parse(value);
-            if ( // Array of primitive arrays
+            if ( // Array of flat-arrays
                 Array.isArray(object)
-                && object.map(x => Array.isArray(object)).indexOf(false) == -1
+                && object.map(x => Array.isArray(x)).indexOf(false) == -1
                 && object.map(
                     x => x.map(
-                        y => !Array.isArray(y) && (typeof x !== 'object' || x == null)
+                        y => (!Array.isArray(y) && (typeof x !== 'object' || x == null))
                     ).indexOf(false) == -1
                 ).indexOf(false) == -1
             ) {
                 space.setTextarea(space.damonUtils.jsonToDamonTable(value));
-            } else {
+            } else if ( // Array of flat-objects
+                Array.isArray(object)
+                && object.map(x => (typeof x == 'object' && !Array.isArray(x) && x !== null)).indexOf(false) == -1
+                && object.map(
+                    x => Object.keys(x).map(
+                        y => (
+                            !(typeof x[y] === 'object' && !Array.isArray(x[y]) && x[y] !== null)
+                            && !Array.isArray(x[y])
+                        )
+                    ).indexOf(false) == -1
+                ).indexOf(false) == -1
+            ) {
+                space.setTextarea(
+                    space.damonUtils.jsonToDamonTable(value, 'dict-rows').replaceAll(': null\n', '\n').slice(0, -6)
+                );
+            } else if ( // Object of nulls or flat-objects
+                (typeof object == 'object' && !Array.isArray(object) && object !== null)
+                && Object.keys(object).map(
+                    x => (object[x] !== null)
+                ).indexOf(true) > -1
+                && Object.keys(object).map(
+                    x => (
+                        (typeof object[x] === 'object' && !Array.isArray(object[x]) && object[x] !== null)
+                        || object[x] === null
+                    )
+                ).indexOf(false) == -1
+                && Object.keys(object).map(
+                    x => (
+                        object[x] === null
+                        || Object.keys(object[x]).map(
+                            y => (
+                                !(typeof x[y] === 'object' && !Array.isArray(x[y]) && x[y] !== null)
+                                && !Array.isArray(x[y])
+                            )
+                        ).indexOf(false) == -1
+                    )
+                ).indexOf(false) == -1
+            ) {
                 let map = space.damon.jsonToMap(value);
                 map.headless = true;
-                space.setTextarea(space.damon.mapToDamon(map));
+                space.setTextarea(
+                    space.damon.mapToDamon(map).replaceAll(': null\n', '\n').slice(0, -6)
+                );
+            } else {
+                let sExpression = true;
+                if (Array.isArray(object)) {
+                    recurse(object);
+                } else {
+                    sExpression = false;
+                }
+                function recurse(array) {
+                    if (typeof array[0] === 'string') {
+                        for (let i = 0, c = array.length; i < c; i++) {
+                            if (Array.isArray(array[i])) {
+                                recurse(array[i])
+                            } else if (
+                                typeof array[i] == 'object' && !Array.isArray(array[i]) && array[i] !== null
+                            ) {
+                                sExpression = false;
+                            }
+                        }
+                    } else {
+                        sExpression = false;
+                    }
+                }
+                if (sExpression) {
+                    space.setTextarea(
+                        space.damonUtils.sExpressionToDamon(value).replaceAll(': null\n', '\n').slice(0, -6)
+                    );
+                } else {
+                    let map = space.damon.jsonToMap(value);
+                    if (
+                        typeof map === 'object'
+                        && map !== null
+                        && !Array.isArray(map)
+                        && map instanceof Map
+                        && map.constructor === Map
+                    ) {
+                        map.headless = true;
+                    }
+                    space.setTextarea(space.damon.mapToDamon(map));
+                }
             }
             textareaInputRoute();
             spaceScrollRoute();
