@@ -29,6 +29,7 @@ HTML interactive documents
     - [x] auto-format hyphens on paste
     - [x] formatting shortcut
 - [x] Pasting valid json produces damon
+- [x] Pasting valid CSV produces damon
 
 ## Limitations
 
