@@ -65,11 +65,11 @@ npm run build
     <link href="./dist/space.css" type="text/css" rel="stylesheet">
 <head>
 <body>
-
     <div class="space"><textarea>- Example</textarea></div>
-    <script src="./dist/space.min.js" type="text/javascript"></script>
+    <script src="./prism.js" type="text/javascript"></script>
+    <script src=".node_modules/space2/dist/space.min.js" type="text/javascript"></script>
     <script  type="text/javascript">
-        const space = new Space(document.getElementsByClassName('space')[0], Prism);
+        const space = new Space(document.getElementsByClassName('space')[0]);
         window.addEventListener('load', function () {
             space.init();
             space.setCarretAt(0, 0);

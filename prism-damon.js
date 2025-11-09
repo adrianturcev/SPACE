@@ -1,4 +1,4 @@
-Prism.languages.damon = {
+window.Prism.languages.damon = {
     'list-hyphen': {
         pattern: /(^\s*)(?:[*-])/m,
         lookbehind: true,
@@ -32,4 +32,4 @@ Prism.languages.damon = {
     'punctuation': /[\{\}\[\],]/,
 };
 
-Prism.languages.webmanifest = Prism.languages.damon;
+window.Prism.languages.webmanifest = window.Prism.languages.damon;

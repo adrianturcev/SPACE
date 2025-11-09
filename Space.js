@@ -1,3 +1,4 @@
+const  PrismDamon = require('./prism-damon.js');
 const  utils = require('yet-another-js-utils');
 const  DamonTwo = require('damon2');
 const  VirtualScroller = require('./virtualScroller.js');
@@ -11,7 +12,7 @@ class Space {
     * @param { object } rootElement
     * @param {{ mode: string; }} app
     */
-    constructor(rootElement, prism, app) {
+    constructor(rootElement, app) {
         let $ = this;
         $.dom = rootElement;
         $.innerHTML = '';
@@ -25,7 +26,7 @@ class Space {
         $.statusBar = {};
         $.copyButton = {};
         $.diffButton = {};
-        $.prism = prism;
+        $.prism = window.Prism;
         $.indentation = "    ";
         $.currentLine = 0;
         $.history = [];
