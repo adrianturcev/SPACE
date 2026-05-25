@@ -11,7 +11,7 @@ HTML interactive documents
 - [x] Light-enough for hardcoding
 - [x] No tab-order hijacking
     - [x] Simply press Space for indentation
-    - [x] Insert tab character (	) shortcut
+    - [x] Insert tab character ("	") shortcut
         - Ctrl + Space
 - [x] Look & feel close to a basic html element
     - [x] Indent with Space/BackSpace
