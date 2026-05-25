@@ -1,9 +1,5 @@
 # SPACE: Portable and Accessible Code Editor
 
-## Demo
-
-[Hello, human!](https://space.planviii.com/)
-
 ## Use Cases
 
 HTML interactive documents
